@@ -49,9 +49,9 @@ export default function SelectionPage() {
         </div>
 
         {/* Top Banner Ad */}
-        {/* <div className="mb-8">
+        <div className="mb-8">
           <AdSpace slot="top-banner" className="max-w-2xl mx-auto" />
-        </div> */}
+        </div>
 
         {/* MBTI Selection Cards */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -123,9 +123,9 @@ export default function SelectionPage() {
         </div>
 
         {/* Bottom Ad */}
-        {/* <div className="mb-8">
+        <div className="mb-8">
           <AdSpace slot="bottom-selection" className="max-w-xl mx-auto" />
-        </div> */}
+        </div>
 
         {/* Analyze Button */}
         <div className="text-center animate-slide-up" style={{animationDelay: '0.2s'}}>
