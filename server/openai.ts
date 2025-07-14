@@ -14,22 +14,19 @@ export interface MBTIAnalysisResult {
 
 export async function analyzeMBTICompatibility(type1: string, type2: string): Promise<MBTIAnalysisResult> {
   const prompt = `
-${type1}+${type2} 연애궁합 분석:
+${type1}+${type2} 연애궁합을 분석해주세요.
 
-tagline: 감성문구 (15-30자)
-summary: "연애할 때 우리는..." 시작 (550-600자)
-loveTips: 꿀팁 5개 (제목+설명 각 550-600자)
-highlight: 특별매력 (200-300자)
-
-JSON 형식 응답:
+다음 형식으로 정확히 JSON 응답해주세요:
 {
   "score": 75,
-  "compatibilityType": "tagline 내용",
+  "compatibilityType": "감성문구 15-30자",
   "title": "${type1}과 ${type2}의 궁합",
   "description": "한줄설명",
-  "characteristics": "summary 내용",
-  "tips": "loveTips 내용"
+  "characteristics": "연애할 때 이런 특징이 있어요 로 시작하는 300-350자 내용",
+  "tips": "연애꿀팁 1개 제목+설명 포함 450-550자 내용"
 }
+
+친근한 말투로 작성하고, JSON 형식을 정확히 지켜주세요.
 `;
 
   try {
@@ -43,7 +40,7 @@ JSON 형식 응답:
       ],
       response_format: { type: "json_object" },
       temperature: 0.3,
-      max_tokens: 600
+      max_tokens: 1000
     });
 
     const content = response.choices[0].message.content || '{}';
@@ -73,8 +70,8 @@ JSON 형식 응답:
         compatibilityType: "특별한 관계",
         title: `${type1}과 ${type2}의 궁합`,
         description: "서로를 이해하는 의미 있는 관계입니다!",
-        characteristics: "연애할 때 우리는 서로의 다른 점을 이해하며 성장합니다.",
-        tips: "서로를 이해하고 존중하는 것이 중요합니다."
+        characteristics: "연애할 때 이런 특징이 있어요. 두 사람은 서로의 다른 점을 이해하며 성장하는 관계입니다. 각자의 강점을 살려 서로를 보완하고, 깊은 유대감을 형성해 나갑니다. 때로는 의견이 다를 수 있지만, 이런 차이점들이 오히려 관계를 더욱 풍요롭게 만들어 줍니다. 서로에 대한 이해와 존중을 바탕으로 하는 건강한 관계를 만들어 나갈 수 있습니다.",
+        tips: "💡 서로를 이해하고 존중하기\n\n연애에서 가장 중요한 것은 서로를 이해하고 존중하는 마음입니다. 두 사람은 서로 다른 성격과 가치관을 가지고 있기 때문에, 상대방의 입장에서 생각해보는 것이 중요합니다. 갈등이 생겼을 때는 감정적으로 대응하기보다는 차분하게 대화를 통해 해결하려고 노력해보세요. 서로의 의견을 듣고 받아들이는 자세가 관계를 더욱 단단하게 만들어 줄 것입니다. 작은 관심과 배려도 잊지 마세요!"
       };
     }
     
