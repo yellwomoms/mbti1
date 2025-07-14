@@ -5,6 +5,11 @@ import { getMBTICompatibility } from "../client/src/lib/mbti-data";
 import { analyzeMBTICompatibility } from "./openai";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // 구글 사이트 인증 파일 제공 (최우선 처리)
+  app.get('/google8334862f75f6dc65.html', (req, res) => {
+    res.set('Content-Type', 'text/html');
+    res.send('google-site-verification: google8334862f75f6dc65.html');
+  });
   
   // Get MBTI compatibility data
   app.get("/api/mbti-compatibility/:type1/:type2", async (req, res) => {

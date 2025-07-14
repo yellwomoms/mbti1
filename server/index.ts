@@ -8,12 +8,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// 구글 사이트 인증 파일 제공
-app.get('/google8334862f75f6dc65.html', (req, res) => {
-  res.set('Content-Type', 'text/html');
-  res.send('google-site-verification: google8334862f75f6dc65.html');
-});
-
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
