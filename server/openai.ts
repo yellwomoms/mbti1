@@ -14,59 +14,29 @@ export interface MBTIAnalysisResult {
 
 export async function analyzeMBTICompatibility(type1: string, type2: string): Promise<MBTIAnalysisResult> {
   const prompt = `
-너는 연애 궁합 콘텐츠를 만드는 작가야.  
+MBTI 전문가로서 ${type1}과 ${type2}의 실제 성격 특성을 분석해서 연애 궁합을 만들어줘.
 
-너무 분석적이고 딱딱한 말투 말고,  
-친구한테 소개해주는 듯한 부드럽고 재밌는 말투로 써 줘.  
-위트도 살짝, 감성도 살짝, 현실 공감도 꼭 들어가면 좋아.  
+실제 MBTI 이론 분석:
+- ${type1}: 인지 기능, 성향, 연애 스타일, 소통 방식 등 구체적으로 분석
+- ${type2}: 인지 기능, 성향, 연애 스타일, 소통 방식 등 구체적으로 분석
+- 두 타입의 상호작용, 갈등 포인트, 시너지 효과 등 심층 분석
 
----
+출력:
+1. tagline: 이 조합만의 독특한 감성 문구 (15~30자)
+2. summary: "연애할 때 우리는..." 시작, 실제 특성 기반 분석 (300자)
+3. loveTips: 이 조합 맞춤 꿀팁 5개 (제목+설명 각 450~550자)
+4. highlight: 실제 궁합 이론 기반 매력 (200~300자)
 
-🎯 다음 두 사람의 MBTI 조합에 맞춰 아래 형식으로 궁합 결과를 작성해줘:
+친구 말투로, 실제 MBTI 분석 바탕으로 작성.
 
-MBTI1: ${type1}  
-MBTI2: ${type2}
-
-📌 출력 형식 (이대로 써줘):
-
-tagline: 두 사람을 대표하는 감성 문구 한 줄 (15~30자, 예: "눈치만렙 애인과 노빠꾸 애인")
-
-summary:  
-"연애할 때 우리는..."으로 시작하는 감성 중심 요약 문단 (300~350자)  
-→ 두 사람의 연애 분위기, 케미, 감정 흐름 등을 재밌고 자연스럽게 묘사해 줘.  
-→ 격식 없이, 공감되게, 친구한테 얘기해주듯 써줘.  
-
-loveTips:  
-두 사람을 위한 연애 꿀팁 5가지  
-각 항목은 제목 + 설명 형식으로 써줘.  
-→ 제목은 위트 있게, 설명은 현실 연애처럼 구체적으로  
-→ 각 설명은 450~550자, 말투는 친근하게!
-
-highlight:  
-이 MBTI 조합만의 매력을 감성적으로 요약한 문단 (200~300자)  
-→ 함께 있을 때 생기는 특별한 분위기나 케미를 감탄스럽게 표현해 줘.
-
----
-
-✅ 중요 스타일 조건
-- 딱딱한 성격 설명 X ❌
-- 감정선이 보이고 상황이 그려져야 함 ✅
-- "책임감이 강하다" 대신 "애인의 일엔 눈치 빠르게 반응하는 스타일이에요"처럼 말해줘 ✅
-- "이해가 중요하다" 대신 "서로 입장 바꿔 생각해보는 연습, 의외로 효과 있어요" 같이 말해줘 ✅
-- 다정하지만 과하게 달콤하지는 않게, 살짝 현실감 있는 사랑 얘기 부탁해 ✅
-
----
-
-꼭 이 형식과 스타일로, ${type1}과 ${type2} 조합에 맞는 궁합 결과를 작성해줘.
-
-JSON 형식으로 응답해주세요:
+JSON:
 {
-  "score": 점수(1-100),
-  "compatibilityType": "tagline 내용",
+  "score": 1-100,
+  "compatibilityType": "tagline",
   "title": "${type1}과 ${type2}의 궁합",
-  "description": "한 줄 설명",
-  "characteristics": "summary 내용",
-  "tips": "loveTips 내용"
+  "description": "한줄설명",
+  "characteristics": "summary",
+  "tips": "loveTips"
 }
 `;
 
@@ -84,8 +54,8 @@ JSON 형식으로 응답해주세요:
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.7,
-      max_tokens: 1500
+      temperature: 0.5,
+      max_tokens: 1000
     });
 
     const result = JSON.parse(response.choices[0].message.content || '{}');

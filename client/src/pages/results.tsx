@@ -46,10 +46,36 @@ export default function ResultsPage({ params }: ResultsPageProps) {
   if (isLoading) {
     return (
       <div className="min-h-screen gradient-bg flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-lg">AI가 궁합을 분석하고 있습니다...</p>
-          <p className="text-sm text-white/70 mt-2">최신 MBTI 이론을 바탕으로 맞춤 분석 중</p>
+        <div className="text-white text-center max-w-md mx-auto px-6">
+          {/* 사랑스러운 하트 애니메이션 */}
+          <div className="relative mb-8">
+            <div className="flex justify-center space-x-1">
+              <Heart className="w-6 h-6 text-pink-300 animate-pulse" style={{animationDelay: '0s'}} />
+              <Heart className="w-8 h-8 text-pink-200 animate-pulse" style={{animationDelay: '0.2s'}} />
+              <Heart className="w-6 h-6 text-pink-300 animate-pulse" style={{animationDelay: '0.4s'}} />
+            </div>
+            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+              <div className="w-12 h-12 rounded-full bg-white/20 animate-ping"></div>
+            </div>
+          </div>
+          
+          {/* 메인 메시지 */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20">
+            <p className="text-xl font-semibold mb-2">💝 AI가 궁합을 분석하고 있습니다...</p>
+            <p className="text-sm text-white/80 mb-4">최신 MBTI 이론을 바탕으로 맞춤 분석 중</p>
+            
+            {/* 프로그레스 바 */}
+            <div className="w-full bg-white/20 rounded-full h-2 mb-4">
+              <div className="bg-gradient-to-r from-pink-400 to-purple-400 h-2 rounded-full animate-pulse" style={{width: '60%'}}></div>
+            </div>
+            
+            {/* 재미있는 로딩 텍스트 */}
+            <div className="text-sm text-white/70 space-y-1">
+              <p>🔮 두 사람의 궁합을 깊이 파헤치는 중...</p>
+              <p>💕 최고의 연애 꿀팁을 준비하고 있어요!</p>
+              <p>✨ 특별한 매력 포인트를 발견했어요!</p>
+            </div>
+          </div>
         </div>
       </div>
     );
