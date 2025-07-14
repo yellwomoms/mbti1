@@ -27,16 +27,16 @@ export async function analyzeMBTICompatibility(type1: string, type2: string, lan
     ru: `Вы автор контента о совместимости в отношениях. Пишите дружелюбным, непринужденным тоном, как будто представляете друзей. Включите остроумие, эмоции и узнаваемые реалистичные сценарии.`
   };
 
-  const prompt = `${type1}와 ${type2}의 MBTI 연애 궁합을 분석해주세요. 친근하고 재밌는 말투로 써주세요.
+  const prompt = `${type1}와 ${type2} MBTI 궁합을 간단하고 친근하게 분석해주세요.
 
-JSON 형식으로 응답:
+JSON으로 응답:
 {
   "score": 점수(1-100),
-  "compatibilityType": "감성적인 한 줄 표현",
-  "title": "${type1}과 ${type2}의 궁합",
-  "description": "간단한 한 줄 요약",
-  "characteristics": "연애할 때 우리는... 으로 시작하는 자연스러운 문단 (300자)",
-  "tips": "연애 꿀팁 3가지를 번호 매기기로 작성. 각 팁은 200자 내외. 반드시 줄바꿈 후 번호 시작."
+  "compatibilityType": "한 줄 표현",
+  "title": "${type1}과 ${type2}의 궁합", 
+  "description": "한 줄 요약",
+  "characteristics": "연애할 때 우리는... 으로 시작하는 문단 (250자)",
+  "tips": "꿀팁 3가지. 번호 앞에 줄바꿈 넣기. 각 150자."
 }`;
 
   try {
@@ -54,7 +54,7 @@ JSON 형식으로 응답:
       ],
       response_format: { type: "json_object" },
       temperature: 0.3,
-      max_tokens: 600
+      max_tokens: 800
     });
 
     const result = JSON.parse(response.choices[0].message.content || '{}');
