@@ -37,12 +37,17 @@ app.get('/sitemap.xml', (req, res) => {
 app.use(express.static(path.resolve(import.meta.dirname, "..", "public")));
 app.use(express.static(path.resolve(import.meta.dirname, "..", "client", "public")));
 
-// 구글 인증 파일을 가장 먼저 처리 (모든 변형 지원)
+// 검색엔진 인증 파일을 가장 먼저 처리 (구글, 네이버)
 app.use((req, res, next) => {
   const googleFiles = [
     '/google8334862f75f6dc65.html',
     '/google8334862f75f6dc65',
     '/google-site-verification: google8334862f75f6dc65.html'
+  ];
+  
+  const naverFiles = [
+    '/naverbc0065282e385ab4f34467cd07285d44.html',
+    '/naverbc0065282e385ab4f34467cd07285d44'
   ];
   
   if (googleFiles.includes(req.url) || googleFiles.includes(req.path)) {
@@ -55,6 +60,18 @@ app.use((req, res, next) => {
     });
     return res.end('google-site-verification: google8334862f75f6dc65.html');
   }
+  
+  if (naverFiles.includes(req.url) || naverFiles.includes(req.path)) {
+    console.log('Naver verification file intercepted:', req.url);
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
+    return res.end('naver-site-verification: naverbc0065282e385ab4f34467cd07285d44.html');
+  }
+  
   next();
 });
 
