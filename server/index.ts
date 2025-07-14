@@ -8,6 +8,31 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// SEO 파일들을 가장 먼저 처리
+app.get('/robots.txt', (req, res) => {
+  console.log('robots.txt accessed');
+  res.type('text/plain');
+  res.send(`User-agent: *
+Allow: /
+Sitemap: https://mbti-master.replit.app/sitemap.xml`);
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  console.log('sitemap.xml accessed');
+  res.type('application/xml');
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mbti-master.replit.app/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mbti-master.replit.app/result/enfp-infj</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>`);
+});
+
 // 정적 파일 제공 (구글 인증 파일 포함)
 app.use(express.static(path.resolve(import.meta.dirname, "..", "public")));
 app.use(express.static(path.resolve(import.meta.dirname, "..", "client", "public")));
