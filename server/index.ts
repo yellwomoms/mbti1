@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // 정적 파일 제공 (구글 인증 파일 포함)
+app.use(express.static(path.resolve(import.meta.dirname, "..", "public")));
 app.use(express.static(path.resolve(import.meta.dirname, "..", "client", "public")));
 
 // 구글 인증 파일을 가장 먼저 처리 (모든 변형 지원)
