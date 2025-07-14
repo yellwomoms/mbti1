@@ -75,7 +75,7 @@ export default function SelectionPage() {
             
             <div className="text-center">
               <p className="text-sm text-gray-500">
-                선택된 유형: <span className="font-semibold">
+                선택된 유형: <span className="font-bold text-lg text-purple-600">
                   {selectedTypes.person1 || '없음'}
                 </span>
               </p>
@@ -96,7 +96,7 @@ export default function SelectionPage() {
               {MBTI_TYPES.map((type) => (
                 <button
                   key={`person2-${type}`}
-                  className={`mbti-badge rounded-xl py-3 px-2 text-sm font-semibold hover-lift ${
+                  className={`mbti-badge person2 rounded-xl py-3 px-2 text-sm font-semibold hover-lift ${
                     selectedTypes.person2 === type ? 'selected' : ''
                   }`}
                   onClick={() => handleMBTISelection(type, '2')}
@@ -108,7 +108,7 @@ export default function SelectionPage() {
             
             <div className="text-center">
               <p className="text-sm text-gray-500">
-                선택된 유형: <span className="font-semibold">
+                선택된 유형: <span className="font-bold text-lg text-pink-600">
                   {selectedTypes.person2 || '없음'}
                 </span>
               </p>
