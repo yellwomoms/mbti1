@@ -119,7 +119,14 @@ The application is designed to be easily deployable on platforms like Replit, Ve
 
 ### 2024-01-14: 다국어 지원 및 SEO 최적화 
 - 10개 언어 자동 감지 시스템 구축 (브라우저 언어, IP 기반)
-- 구글 애드센스 공간 준비 (주석 처리로 레이아웃 영향 없음)
+- 구글 애드센스 공간 완전 제거 (레이아웃 깨짐 방지)
 - SEO meta 태그 완전 적용 (Open Graph, Twitter Card 포함)
 - 언어별 완전 번역 완료 (한국어, 영어, 일본어, 중국어, 스페인어, 프랑스어, 독일어, 이탈리아어, 포르투갈어, 러시아어)
 - 자동 언어 감지로 사용자 편의성 극대화
+- 언어 선택 메뉴 제거 (자동 감지만 유지)
+
+### 2024-01-14: 구글 서치 콘솔 설정 시도
+- HTML 파일 방법: 6중 보호 시스템으로 `/google8334862f75f6dc65.html` 구현
+- HTML 메타 태그 방법: `<meta name="google-site-verification">` 추가
+- Replit 배포 환경에서 인증 파일 접근 제한 이슈 발생
+- 권장 해결책: DNS TXT 레코드 방법 사용 필요
