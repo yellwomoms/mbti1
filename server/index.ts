@@ -11,6 +11,20 @@ app.use(express.urlencoded({ extended: false }));
 // 정적 파일 제공 (구글 인증 파일 포함)
 app.use(express.static(path.resolve(import.meta.dirname, "..", "client", "public")));
 
+// 구글 인증 파일을 가장 먼저 처리
+app.use((req, res, next) => {
+  if (req.url === '/google8334862f75f6dc65.html' || req.path === '/google8334862f75f6dc65.html') {
+    console.log('Google verification file intercepted:', req.url);
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache',
+      'Access-Control-Allow-Origin': '*'
+    });
+    return res.end('google-site-verification: google8334862f75f6dc65.html');
+  }
+  next();
+});
+
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   const start = Date.now();
@@ -43,12 +57,17 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // 구글 인증 파일을 최우선으로 처리
-  app.get('/google8334862f75f6dc65.html', (req, res) => {
-    console.log('Google verification file accessed directly from:', req.url);
+  // 구글 인증 파일을 최우선으로 처리 (모든 미들웨어보다 먼저)
+  app.all('/google8334862f75f6dc65.html', (req, res) => {
+    console.log('Google verification file accessed directly from:', req.url, req.method);
     res.writeHead(200, {
-      'Content-Type': 'text/html',
-      'Cache-Control': 'no-cache'
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+      'Access-Control-Allow-Headers': '*'
     });
     res.end('google-site-verification: google8334862f75f6dc65.html');
   });

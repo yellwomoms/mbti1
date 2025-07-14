@@ -5,12 +5,20 @@ import { getMBTICompatibility } from "../client/src/lib/mbti-data";
 import { analyzeMBTICompatibility } from "./openai";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // 구글 사이트 인증 파일 제공 (최우선 처리)
-  app.get('/google8334862f75f6dc65.html', (req, res) => {
-    console.log('Google verification file requested');
-    res.set('Content-Type', 'text/html');
-    res.status(200).send('google-site-verification: google8334862f75f6dc65.html');
-  });
+  // 구글 사이트 인증 파일 제공 (다중 경로 대응)
+  const googleVerificationHandler = (req: any, res: any) => {
+    console.log('Google verification route hit:', req.url);
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache',
+      'Access-Control-Allow-Origin': '*'
+    });
+    res.end('google-site-verification: google8334862f75f6dc65.html');
+  };
+  
+  app.get('/google8334862f75f6dc65.html', googleVerificationHandler);
+  app.get('/google8334862f75f6dc65', googleVerificationHandler);
+  app.use('/google8334862f75f6dc65.html', googleVerificationHandler);
   
   // Get MBTI compatibility data
   app.get("/api/mbti-compatibility/:type1/:type2", async (req, res) => {
