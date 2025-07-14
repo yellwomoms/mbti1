@@ -131,13 +131,6 @@ The application is designed to be easily deployable on platforms like Replit, Ve
 
 ### 2024-01-14: 광고 영역 주석 처리 및 AI 설정 최적화
 - 모든 AdSpace 컴포넌트 주석 처리 (나중에 설정 시 활성화 가능)
-- OpenAI API temperature 0.7로 조정 (창의성과 일관성 균형)
+- OpenAI API temperature 0.7 → 0.5로 조정 (창의성과 일관성 균형)
 - 광고 위치 4곳 모두 주석 상태: 선택페이지 상단/하단, 결과페이지 중간/하단
 - 사용자 선호: 광고 없는 깔끔한 인터페이스 우선
-
-### 2024-01-14: 구글 SEO 및 소셜 공유 시스템 완성
-- 10개 언어별 SEO 메타태그 완성 (title, description, keywords, OG, Twitter)
-- 국가별 맞춤형 소셜 공유 시스템 구축 (Web Share API + 플랫폼별 fallback)
-- 언어별 대표 SNS 플랫폼 자동 감지 (한국: 카카오톡/라인, 일본: LINE, 러시아: 텔레그램 등)
-- AI 분석 속도 최적화: 5초 이내 응답 보장 (temperature 0.3, max_tokens 800)
-- ShareButton 컴포넌트로 사용자 친화적 공유 경험 제공

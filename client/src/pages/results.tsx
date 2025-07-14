@@ -196,17 +196,13 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                 return acc;
               }, [] as string[][]).map((group, groupIndex) => {
                 const combinedText = group.join(' ');
-                // 번호 매기기 앞에 줄바꿈 추가 및 키워드 볼드 처리
+                // 중요한 키워드들을 볼드 처리 (MBTI 타입 제외)
                 const highlightedText = combinedText
-                  // 번호 앞에 줄바꿈 추가 (다양한 패턴)
-                  .replace(/([.!?])\s*(\d+\.\s)/g, '$1\n\n$2')
-                  .replace(/^(\d+\.\s)/gm, '\n\n$1')
-                  .replace(/([가-힣]+)\s+(\d+\.\s)/g, '$1\n\n$2')
-                  .replace(/(\w+)\s+(\d+\.\s)/g, '$1\n\n$2')
-                  .replace(/(\s)(\d+\.\s)/g, '$1\n\n$2')
-                  // 줄바꿈을 <br/> 태그로 변환
-                  .replace(/\n\n/g, '<br/><br/>')
-                  .replace(/\n/g, '<br/>')
+                  .replace(/([.!?])\s*(\d+\.\s)/g, '$1<br/><br/>$2') // Add double line break before numbers after sentences
+                  .replace(/^(\d+\.\s)/gm, '<br/><br/>$1') // Add double line break before numbers at start of line
+                  .replace(/([가-힣]+)\s+(\d+\.\s)/g, '$1<br/><br/>$2') // Add line break before numbers after Korean words
+                  .replace(/(\w+)\s+(\d+\.\s)/g, '$1<br/><br/>$2') // Add line break before numbers after words
+                  .replace(/(\s)(\d+\.\s)/g, '$1<br/><br/>$2') // Add line break before numbers after any space
                   .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰|중요|필요|노력|표현|공감|경청|조화|균형|깊이|의미|특별|완벽|최고|놀라운|매력|시너지|행복|즐거운|따뜻한|달콤한|설레는|뜨거운|차분한|편안한|안정적인|역동적인)/g, '<strong>$1</strong>');
                 
                 return (
@@ -239,15 +235,11 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                       <div className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
                         <span dangerouslySetInnerHTML={{
                           __html: String(tip.content || tip)
-                            // 번호 앞에 줄바꿈 추가 (다양한 패턴)
-                            .replace(/([.!?])\s*(\d+\.\s)/g, '$1\n\n$2')
-                            .replace(/^(\d+\.\s)/gm, '\n\n$1')
-                            .replace(/([가-힣]+)\s+(\d+\.\s)/g, '$1\n\n$2')
-                            .replace(/(\w+)\s+(\d+\.\s)/g, '$1\n\n$2')
-                            .replace(/(\s)(\d+\.\s)/g, '$1\n\n$2')
-                            // 줄바꿈을 <br/> 태그로 변환
-                            .replace(/\n\n/g, '<br/><br/>')
-                            .replace(/\n/g, '<br/>')
+                            .replace(/([.!?])\s*(\d+\.\s)/g, '$1<br/><br/>$2') // Add double line break before numbers after sentences
+                            .replace(/^(\d+\.\s)/gm, '<br/><br/>$1') // Add double line break before numbers at start of line
+                            .replace(/([가-힣]+)\s+(\d+\.\s)/g, '$1<br/><br/>$2') // Add line break before numbers after Korean words
+                            .replace(/(\w+)\s+(\d+\.\s)/g, '$1<br/><br/>$2') // Add line break before numbers after words
+                            .replace(/(\s)(\d+\.\s)/g, '$1<br/><br/>$2') // Add line break before numbers after any space
                             .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰|중요|필요|노력|표현|공감|경청|조화|균형|깊이|의미|특별|완벽|최고|놀라운|매력|시너지)/g, '<strong>$1</strong>')
                         }} />
                       </div>
