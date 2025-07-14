@@ -187,7 +187,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             </div>
             
             <div className="space-y-4">
-              {compatibility.characteristics.split(/(?<=\.)\s+(?=[A-Z가-힣])/g).reduce((acc, sentence, index) => {
+              {(typeof compatibility.characteristics === 'string' ? compatibility.characteristics : String(compatibility.characteristics || '')).split(/(?<=\.)\s+(?=[A-Z가-힣])/g).reduce((acc, sentence, index) => {
                 const trimmed = sentence.trim();
                 if (!trimmed) return acc;
                 
@@ -225,7 +225,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             </div>
             
             <div className="space-y-4">
-              {compatibility.tips.split(/(?<=\.)\s+(?=[A-Z가-힣])/g).reduce((acc, sentence, index) => {
+              {(typeof compatibility.tips === 'string' ? compatibility.tips : String(compatibility.tips || '')).split(/(?<=\.)\s+(?=[A-Z가-힣])/g).reduce((acc, sentence, index) => {
                 const trimmed = sentence.trim();
                 if (!trimmed) return acc;
                 
