@@ -48,7 +48,8 @@ export default function ResultsPage({ params }: ResultsPageProps) {
       <div className="min-h-screen gradient-bg flex items-center justify-center">
         <div className="text-white text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-lg">궁합을 분석하고 있습니다...</p>
+          <p className="text-lg">AI가 궁합을 분석하고 있습니다...</p>
+          <p className="text-sm text-white/70 mt-2">최신 MBTI 이론을 바탕으로 맞춤 분석 중</p>
         </div>
       </div>
     );
@@ -291,7 +292,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             </Button>
           </div>
           <p className="text-white/70 text-sm">
-            총 <span className="font-semibold">256가지</span> MBTI 조합별 맞춤 분석 제공
+            AI가 실시간으로 생성한 <span className="font-semibold">맞춤형</span> MBTI 궁합 분석
           </p>
         </div>
       </div>

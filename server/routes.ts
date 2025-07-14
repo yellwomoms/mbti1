@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { getMBTICompatibility } from "../client/src/lib/mbti-data";
+import { analyzeMBTICompatibility } from "./openai";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -21,24 +22,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // First check storage
       let compatibility = await storage.getMBTICompatibility(type1, type2);
       
-      // If not in storage, get from data and store it
+      // If not in storage, get from OpenAI API and store it
       if (!compatibility) {
-        const data = getMBTICompatibility(type1, type2);
-        if (!data) {
-          return res.status(404).json({ message: "Compatibility data not found" });
+        try {
+          const aiAnalysis = await analyzeMBTICompatibility(type1, type2);
+          
+          // Store in memory storage
+          compatibility = await storage.createMBTICompatibility({
+            type1,
+            type2,
+            score: aiAnalysis.score,
+            compatibilityType: aiAnalysis.compatibilityType,
+            title: aiAnalysis.title,
+            description: aiAnalysis.description,
+            characteristics: aiAnalysis.characteristics,
+            tips: aiAnalysis.tips
+          });
+        } catch (aiError) {
+          console.error("AI 분석 실패, 기본 데이터 사용:", aiError);
+          
+          // AI 분석 실패 시 기본 데이터로 폴백
+          const data = getMBTICompatibility(type1, type2);
+          if (!data) {
+            return res.status(404).json({ message: "Compatibility data not found" });
+          }
+          
+          // Store in memory storage
+          compatibility = await storage.createMBTICompatibility({
+            type1,
+            type2,
+            score: data.score,
+            compatibilityType: data.compatibilityType,
+            title: data.title,
+            description: data.description,
+            characteristics: data.characteristics,
+            tips: data.tips
+          });
         }
-        
-        // Store in memory storage
-        compatibility = await storage.createMBTICompatibility({
-          type1,
-          type2,
-          score: data.score,
-          compatibilityType: data.compatibilityType,
-          title: data.title,
-          description: data.description,
-          characteristics: data.characteristics,
-          tips: data.tips
-        });
       }
 
       res.json(compatibility);

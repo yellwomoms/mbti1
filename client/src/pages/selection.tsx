@@ -42,8 +42,8 @@ export default function SelectionPage() {
             MBTI 궁합 테스트
           </h1>
           <p className="text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
-            과학적인 MBTI 분석을 통해 두 사람의 연애 궁합을 알아보세요. 
-            256가지 조합별 맞춤 분석과 실용적인 연애 조언을 제공합니다.
+            AI가 실시간으로 두 사람의 연애 궁합을 분석해드립니다. 
+            최신 MBTI 이론을 바탕으로 맞춤형 분석과 실용적인 연애 조언을 제공합니다.
           </p>
         </div>
 
