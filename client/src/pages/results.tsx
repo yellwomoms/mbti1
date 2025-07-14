@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import type { MBTICompatibility } from "@shared/schema";
+import { useState, useEffect } from "react";
 
 interface ResultsPageProps {
   params: {
@@ -17,11 +18,27 @@ export default function ResultsPage({ params }: ResultsPageProps) {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const { type1, type2 } = params;
+  const [progress, setProgress] = useState(10);
 
   const { data: compatibility, isLoading, error } = useQuery<MBTICompatibility>({
     queryKey: ['/api/mbti-compatibility', type1, type2],
     enabled: !!(type1 && type2),
   });
+
+  // 진행률 애니메이션
+  useEffect(() => {
+    if (isLoading) {
+      const interval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 90) return 90;
+          return prev + Math.random() * 15;
+        });
+      }, 500);
+      return () => clearInterval(interval);
+    } else {
+      setProgress(100);
+    }
+  }, [isLoading]);
 
   const handleShare = async () => {
     try {
@@ -47,6 +64,19 @@ export default function ResultsPage({ params }: ResultsPageProps) {
     return (
       <div className="min-h-screen gradient-bg flex items-center justify-center">
         <div className="text-white text-center max-w-md mx-auto px-6">
+          {/* MBTI 타입 표시 */}
+          <div className="mb-8">
+            <div className="flex justify-center items-center space-x-4 mb-4">
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2 border border-white/30">
+                <span className="text-2xl font-bold text-pink-200">{type1}</span>
+              </div>
+              <Heart className="w-6 h-6 text-pink-300 animate-pulse" />
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2 border border-white/30">
+                <span className="text-2xl font-bold text-pink-200">{type2}</span>
+              </div>
+            </div>
+          </div>
+          
           {/* 사랑스러운 하트 애니메이션 */}
           <div className="relative mb-8">
             <div className="flex justify-center space-x-1">
@@ -64,9 +94,18 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             <p className="text-xl font-semibold mb-2">💝 AI가 궁합을 분석하고 있습니다...</p>
             <p className="text-sm text-white/80 mb-4">최신 MBTI 이론을 바탕으로 맞춤 분석 중</p>
             
-            {/* 프로그레스 바 */}
-            <div className="w-full bg-white/20 rounded-full h-2 mb-4">
-              <div className="bg-gradient-to-r from-pink-400 to-purple-400 h-2 rounded-full animate-pulse" style={{width: '60%'}}></div>
+            {/* 진행률 표시 */}
+            <div className="mb-4">
+              <div className="flex justify-between text-sm text-white/70 mb-1">
+                <span>분석 진행률</span>
+                <span>{Math.round(progress)}%</span>
+              </div>
+              <div className="w-full bg-white/20 rounded-full h-3">
+                <div 
+                  className="bg-gradient-to-r from-pink-400 to-purple-400 h-3 rounded-full transition-all duration-500 ease-out"
+                  style={{width: `${progress}%`}}
+                ></div>
+              </div>
             </div>
             
             {/* 재미있는 로딩 텍스트 */}
