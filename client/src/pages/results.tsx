@@ -284,9 +284,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
           </Card>
 
           {/* Middle Ad */}
-          <div className="my-8">
+          {/* <div className="my-8">
             <AdSpace slot="middle-results" style="display" />
-          </div>
+          </div> */}
 
           {/* Special Combination Insight */}
           <div className="bg-white rounded-3xl p-8 shadow-xl hover-lift animate-slide-up border-2 border-purple-200" style={{animationDelay: '0.3s'}}>
@@ -311,9 +311,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         </div>
 
         {/* Bottom Ad */}
-        <div className="my-8">
+        {/* <div className="my-8">
           <AdSpace slot="bottom-results" className="max-w-2xl mx-auto" />
-        </div>
+        </div> */}
 
         {/* Share and Action Buttons */}
         <div className="text-center mt-12 space-y-4 animate-slide-up" style={{animationDelay: '0.4s'}}>
