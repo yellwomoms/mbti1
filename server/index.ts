@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(import.meta.dirname, "..", "client", "public")));
 
 app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
   const start = Date.now();
   const path = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
@@ -44,9 +45,12 @@ app.use((req, res, next) => {
 (async () => {
   // 구글 인증 파일을 최우선으로 처리
   app.get('/google8334862f75f6dc65.html', (req, res) => {
-    console.log('Google verification file accessed directly');
-    res.set('Content-Type', 'text/html; charset=utf-8');
-    res.status(200).end('google-site-verification: google8334862f75f6dc65.html');
+    console.log('Google verification file accessed directly from:', req.url);
+    res.writeHead(200, {
+      'Content-Type': 'text/html',
+      'Cache-Control': 'no-cache'
+    });
+    res.end('google-site-verification: google8334862f75f6dc65.html');
   });
 
   const server = await registerRoutes(app);
