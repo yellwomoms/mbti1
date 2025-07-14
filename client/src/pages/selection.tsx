@@ -3,15 +3,13 @@ import { useLocation } from "wouter";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MBTI_TYPES } from "@/lib/mbti-data";
-import { Heart, User, Sparkles, Globe } from "lucide-react";
+import { Heart, User, Sparkles } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
-import { SUPPORTED_LANGUAGES } from "@/lib/language";
 import AdSpace from "@/components/AdSpace";
 
 export default function SelectionPage() {
   const [, setLocation] = useLocation();
-  const { currentLanguage, changeLanguage, t, isLoading } = useLanguage();
-  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const { t, isLoading } = useLanguage();
   const [selectedTypes, setSelectedTypes] = useState<{
     person1: string | null;
     person2: string | null;
@@ -49,44 +47,8 @@ export default function SelectionPage() {
   return (
     <div className="min-h-screen gradient-bg">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* 상단 광고 */}
-        <div className="flex justify-center">
-          <AdSpace size="leaderboard" position="top" />
-        </div>
-
-        {/* 언어 선택 버튼 */}
-        <div className="flex justify-end mb-4">
-          <div className="relative">
-            <Button
-              onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-              variant="ghost"
-              className="text-white/90 hover:text-white hover:bg-white/10"
-            >
-              <Globe className="w-4 h-4 mr-2" />
-              {SUPPORTED_LANGUAGES.find(lang => lang.code === currentLanguage)?.flag} {SUPPORTED_LANGUAGES.find(lang => lang.code === currentLanguage)?.name}
-            </Button>
-            
-            {showLanguageMenu && (
-              <div className="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 min-w-48">
-                {SUPPORTED_LANGUAGES.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => {
-                      changeLanguage(lang.code);
-                      setShowLanguageMenu(false);
-                    }}
-                    className={`w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2 ${
-                      currentLanguage === lang.code ? 'bg-purple-50 text-purple-700' : 'text-gray-700'
-                    }`}
-                  >
-                    <span className="text-lg">{lang.flag}</span>
-                    <span className="font-medium">{lang.name}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+        {/* 상단 광고 공간 (주석 처리) */}
+        {/* <AdSpace size="leaderboard" position="top" /> */}
 
         {/* Header Section */}
         <div className="text-center mb-12 animate-slide-up">
@@ -109,8 +71,8 @@ export default function SelectionPage() {
               <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <User className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">나의 MBTI</h3>
-              <p className="text-gray-600">첫 번째 사람의 성격 유형을 선택해주세요</p>
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">{t('person1')}</h3>
+              <p className="text-gray-600">{t('person1Desc')}</p>
             </div>
             
             <div className="grid grid-cols-4 gap-3 mb-6">
@@ -127,10 +89,13 @@ export default function SelectionPage() {
               ))}
             </div>
             
+            {/* 사이드 광고 공간 (주석 처리) */}
+            {/* <AdSpace size="square" position="inline" /> */}
+            
             <div className="text-center">
               <p className="text-sm text-gray-500">
-                선택된 유형: <span className="font-bold text-lg text-purple-600">
-                  {selectedTypes.person1 || '없음'}
+                {t('selected')}: <span className="font-bold text-lg text-purple-600">
+                  {selectedTypes.person1 || t('none')}
                 </span>
               </p>
             </div>
@@ -142,8 +107,8 @@ export default function SelectionPage() {
               <div className="w-20 h-20 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Heart className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">상대방 MBTI</h3>
-              <p className="text-gray-600">두 번째 사람의 성격 유형을 선택해주세요</p>
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">{t('person2')}</h3>
+              <p className="text-gray-600">{t('person2Desc')}</p>
             </div>
             
             <div className="grid grid-cols-4 gap-3 mb-6">
@@ -162,8 +127,8 @@ export default function SelectionPage() {
             
             <div className="text-center">
               <p className="text-sm text-gray-500">
-                선택된 유형: <span className="font-bold text-lg text-pink-600">
-                  {selectedTypes.person2 || '없음'}
+                {t('selected')}: <span className="font-bold text-lg text-pink-600">
+                  {selectedTypes.person2 || t('none')}
                 </span>
               </p>
             </div>
@@ -178,10 +143,10 @@ export default function SelectionPage() {
             className="bg-white text-[var(--deep-indigo)] px-12 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             <Sparkles className="w-5 h-5 mr-3" />
-            궁합 분석하기
+            {t('analyzeButton')}
           </Button>
           <p className="text-white/70 text-sm mt-4">
-            {isReady ? '두 MBTI의 궁합을 분석해드릴게요!' : '두 MBTI 유형을 모두 선택해주세요'}
+            {isReady ? t('analyzing') : '두 MBTI 유형을 모두 선택해주세요'}
           </p>
         </div>
       </div>

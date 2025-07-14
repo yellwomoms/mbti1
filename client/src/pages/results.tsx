@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import type { MBTICompatibility } from "@shared/schema";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
+import AdSpace from "@/components/AdSpace";
 
 interface ResultsPageProps {
   params: {
@@ -19,6 +21,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
   const { toast } = useToast();
   const { type1, type2 } = params;
   const [progress, setProgress] = useState(10);
+  const { t } = useLanguage();
 
   const { data: compatibility, isLoading, error } = useQuery<MBTICompatibility>({
     queryKey: ['/api/mbti-compatibility', type1, type2],
@@ -151,7 +154,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             onClick={() => setLocation('/')}
             className="mt-4 bg-white text-[var(--deep-indigo)]"
           >
-            다시 시도
+            {t('retry')}
           </Button>
         </div>
       </div>
@@ -161,6 +164,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
   return (
     <div className="min-h-screen gradient-bg">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* 상단 광고 공간 (주석 처리) */}
+        {/* <AdSpace size="leaderboard" position="top" /> */}
+        
         {/* Results Header */}
         <div className="flex items-center justify-between mb-8 animate-slide-up">
           <Button
@@ -169,7 +175,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             className="flex items-center text-white/90 hover:text-white"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            <span className="font-medium">다시 선택하기</span>
+            <span className="font-medium">{t('backButton')}</span>
           </Button>
           <div className="flex items-center space-x-4">
             <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
@@ -270,7 +276,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               <div className="w-12 h-12 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center mr-4">
                 <Heart className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800">연애할 때 이런 특징이 있어요</h3>
+              <h3 className="text-2xl font-bold text-gray-800">{t('characteristics')}</h3>
             </div>
             
             <div className="space-y-4">
@@ -308,7 +314,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mr-4">
                 <Lightbulb className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800">연애 꿀팁</h3>
+              <h3 className="text-2xl font-bold text-gray-800">{t('tips')}</h3>
             </div>
             
             <div className="space-y-4">
@@ -370,7 +376,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               className="bg-white text-[var(--deep-indigo)] px-8 py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             >
               <Share2 className="w-4 h-4 mr-3" />
-              결과 공유하기
+              {t('share')}
             </Button>
             <Button
               onClick={() => setLocation('/')}

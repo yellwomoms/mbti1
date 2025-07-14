@@ -47,27 +47,21 @@ export function AdSpace({ size, position, className = '' }: AdSpaceProps) {
   };
 
   return (
-    <div className={`${getSizeClasses()} ${getPositionClasses()} ${className}`}>
+    <>
       {/* 구글 애드센스 광고 코드 (주석 처리) */}
       {/*
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-client="ca-pub-XXXXXXXXXX"
-        data-ad-slot="XXXXXXXXXX"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
-      */}
-      
-      {/* 개발용 플레이스홀더 */}
-      <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400 text-sm font-medium">
-        <div className="text-center">
-          <div className="mb-1">📢 광고 공간</div>
-          <div className="text-xs">{size} - {position}</div>
-        </div>
+      <div className={`${getSizeClasses()} ${getPositionClasses()} ${className}`}>
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-XXXXXXXXXX"
+          data-ad-slot="XXXXXXXXXX"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
       </div>
-    </div>
+      */}
+    </>
   );
 }
 
