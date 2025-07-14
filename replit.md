@@ -7,6 +7,7 @@ This is a full-stack MBTI (Myers-Briggs Type Indicator) compatibility testing ap
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Critical formatting requirement: Numbered lists (1., 2., 3.) must have proper line breaks before each number to prevent text concatenation.
 
 ## System Architecture
 
@@ -121,3 +122,9 @@ The application is designed to be easily deployable on platforms like Replit, Ve
 - 다크모드 토글 버튼 추가 (우측 상단 고정 위치)
 - 광고 위치: 선택페이지 상단/하단, 결과페이지 중간/하단 총 4곳 
 - 수익화 준비 완료: 애드센스 슬롯 ID만 입력하면 바로 운영 가능
+
+### 2024-01-14: 번호 리스트 포맷팅 개선 강화
+- 포괄적인 정규식 패턴 추가로 한국어 문맥에서의 번호 매기기 문제 해결
+- 문장 끝, 한국어 단어 뒤, 공백 뒤 등 다양한 위치의 번호 감지
+- AI 프롬프트에 번호 매기기 규칙 강화 및 예시 추가
+- 사용자 요구사항: "1. 2. 3." 형태 번호가 문장 중간에 붙지 않도록 개선
