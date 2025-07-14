@@ -185,12 +185,17 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               <h3 className="text-2xl font-bold text-gray-800">연애할 때 이런 특징이 있어요</h3>
             </div>
             
-            <div className="space-y-4">
-              {compatibility.characteristics.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="text-gray-700 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+            <div className="space-y-6">
+              {compatibility.characteristics.split('. ').map((sentence, index) => {
+                if (sentence.trim()) {
+                  return (
+                    <p key={index} className="text-gray-700 text-base leading-relaxed">
+                      {sentence.trim()}{sentence.includes('.') ? '' : '.'}
+                    </p>
+                  );
+                }
+                return null;
+              }).filter(Boolean)}
             </div>
           </Card>
 
@@ -204,46 +209,44 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             </div>
             
             <div className="space-y-6">
-              {compatibility.tips.split('\n\n').map((section, index) => (
-                <div key={index}>
-                  {section.split('\n').map((line, lineIndex) => {
-                    if (line.includes('•')) {
-                      return (
-                        <div key={lineIndex} className="flex items-start mb-2">
-                          <span className="text-purple-500 mr-3 mt-1">•</span>
-                          <span className="text-gray-700">{line.replace('•', '').trim()}</span>
-                        </div>
-                      );
-                    } else if (line.trim()) {
-                      return (
-                        <h4 key={lineIndex} className="text-lg font-semibold text-purple-600 mb-3 flex items-center">
-                          <Heart className="w-4 h-4 text-pink-500 mr-2" />
-                          {line}
-                        </h4>
-                      );
-                    }
-                    return null;
-                  })}
-                </div>
-              ))}
+              {compatibility.tips.split('. ').map((sentence, index) => {
+                if (sentence.trim()) {
+                  const cleanSentence = sentence.trim();
+                  // 강조할 키워드들을 볼드 처리
+                  const highlightedText = cleanSentence
+                    .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰)/g, '<strong>$1</strong>')
+                    .replace(/([A-Z]{4})/g, '<strong>$1</strong>'); // MBTI 타입 강조
+                  
+                  return (
+                    <p key={index} className="text-gray-700 text-base leading-relaxed">
+                      <span dangerouslySetInnerHTML={{
+                        __html: highlightedText + (cleanSentence.includes('.') ? '' : '.')
+                      }} />
+                    </p>
+                  );
+                }
+                return null;
+              }).filter(Boolean)}
             </div>
           </Card>
 
           {/* Special Combination Insight */}
-          <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-3xl p-8 text-white shadow-xl hover-lift animate-slide-up" style={{animationDelay: '0.3s'}}>
+          <div className="bg-white rounded-3xl p-8 shadow-xl hover-lift animate-slide-up border-2 border-purple-200" style={{animationDelay: '0.3s'}}>
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mr-4">
                 <Star className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold">{type1} × {type2} 특별한 조합</h3>
+              <h3 className="text-2xl font-bold text-gray-800">{type1} × {type2} 특별한 조합</h3>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-              <h4 className="text-xl font-semibold mb-4">🌟 이 조합의 매력 포인트</h4>
-              <p className="leading-relaxed text-white/95">
-                {type1}의 특별한 매력과 {type2}의 독특한 장점이 만나면 놀라운 시너지를 만들어냅니다. 
-                서로 다른 강점이 완벽하게 보완되어, 함께라면 어떤 목표든 달성할 수 있는 최고의 팀워크를 자랑합니다. 
-                이 조합은 깊이 있는 관계를 만들어갈 수 있는 특별한 잠재력을 가지고 있습니다.
+            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 border border-purple-100">
+              <h4 className="text-xl font-semibold mb-4 text-purple-700 flex items-center">
+                🌟 이 조합의 매력 포인트
+              </h4>
+              <p className="leading-relaxed text-gray-700 text-base">
+                <strong>{type1}</strong>의 특별한 매력과 <strong>{type2}</strong>의 독특한 장점이 만나면 놀라운 시너지를 만들어냅니다. 
+                서로 다른 강점이 완벽하게 보완되어, <strong>함께라면 어떤 목표든 달성할 수 있는 최고의 팀워크</strong>를 자랑합니다. 
+                이 조합은 <strong>깊이 있는 관계</strong>를 만들어갈 수 있는 특별한 잠재력을 가지고 있습니다.
               </p>
             </div>
           </div>
