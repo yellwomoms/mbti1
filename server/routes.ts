@@ -25,8 +25,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // If not in storage, get from AI analysis
       if (!compatibility) {
         try {
+          // Get language from query parameter
+          const language = req.query.lang as string || 'ko';
           // Always use AI analysis for all combinations
-          const aiAnalysis = await analyzeMBTICompatibility(type1, type2);
+          const aiAnalysis = await analyzeMBTICompatibility(type1, type2, language);
           
           // Store AI analysis result
           compatibility = await storage.createMBTICompatibility({

@@ -3,7 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { SEOHead } from "@/components/SEOHead";
 import SelectionPage from "@/pages/selection";
 import ResultsPage from "@/pages/results";
 import NotFound from "@/pages/not-found";
@@ -22,7 +22,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <ThemeToggle />
+        <SEOHead />
         <Toaster />
         <Router />
       </TooltipProvider>

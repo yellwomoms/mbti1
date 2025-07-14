@@ -1,6 +1,4 @@
-// Language system with auto-detection
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-
+// Simple language system without React context
 export const languages = {
   ko: '한국어',
   en: 'English',
@@ -261,22 +259,11 @@ const ipToLanguageMap: Record<string, Language> = {
   'RU': 'ru'
 };
 
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: keyof typeof translations.ko) => string;
-}
+// Global language state (simple without React context)
+let currentLanguage: Language = 'ko';
 
-const LanguageContext = createContext<LanguageContextType>({
-  language: 'ko',
-  setLanguage: () => {},
-  t: (key) => key
-});
-
-export const useLanguage = () => useContext(LanguageContext);
-
-// Detect user's location and language
-async function detectUserLanguage(): Promise<Language> {
+// Language detection function
+export async function detectUserLanguage(): Promise<Language> {
   try {
     // Try to get location from IP
     const response = await fetch('https://ipapi.co/json/');
@@ -299,31 +286,33 @@ async function detectUserLanguage(): Promise<Language> {
   return 'ko'; // Default to Korean
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('ko');
-
-  useEffect(() => {
-    // Get language from localStorage first
-    const savedLang = localStorage.getItem('mbti-language') as Language;
-    if (savedLang && languages[savedLang]) {
-      setLanguage(savedLang);
-    } else {
-      // Auto-detect language based on IP and browser
-      detectUserLanguage().then(detectedLang => {
-        setLanguage(detectedLang);
-        localStorage.setItem('mbti-language', detectedLang);
-      });
-    }
-  }, []);
-
-  const changeLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem('mbti-language', lang);
-  };
-
-  const t = (key: keyof typeof translations.ko) => {
-    return translations[language][key] || translations.ko[key] || key;
-  };
-
-  return children; // Simplified without provider for now
+// Initialize language detection
+export async function initializeLanguage(): Promise<void> {
+  const savedLang = localStorage.getItem('mbti-language') as Language;
+  if (savedLang && languages[savedLang]) {
+    currentLanguage = savedLang;
+  } else {
+    const detectedLang = await detectUserLanguage();
+    currentLanguage = detectedLang;
+    localStorage.setItem('mbti-language', detectedLang);
+  }
 }
+
+// Get current language
+export function getCurrentLanguage(): Language {
+  return currentLanguage;
+}
+
+// Set language
+export function setLanguage(lang: Language): void {
+  currentLanguage = lang;
+  localStorage.setItem('mbti-language', lang);
+}
+
+// Translation function
+export function t(key: keyof typeof translations.ko): string {
+  return translations[currentLanguage][key] || translations.ko[key] || key;
+}
+
+// Initialize language on module load
+initializeLanguage();

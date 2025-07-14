@@ -52,11 +52,5 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     changeTheme(newTheme);
   };
 
-  const contextValue = { theme, setTheme: changeTheme, toggleTheme };
-  
-  return (
-    <ThemeContext.Provider value={contextValue}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return null; // Dark mode disabled
 }

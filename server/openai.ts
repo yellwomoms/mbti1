@@ -12,17 +12,27 @@ export interface MBTIAnalysisResult {
   tips: string;
 }
 
-export async function analyzeMBTICompatibility(type1: string, type2: string): Promise<MBTIAnalysisResult> {
-  const prompt = `
-너는 연애 궁합 콘텐츠를 만드는 작가야.  
+export async function analyzeMBTICompatibility(type1: string, type2: string, language: string = 'ko'): Promise<MBTIAnalysisResult> {
+  // Language-specific prompts
+  const languagePrompts = {
+    ko: `너는 연애 궁합 콘텐츠를 만드는 작가야. 너무 분석적이고 딱딱한 말투 말고, 친구한테 소개해주는 듯한 부드럽고 재밌는 말투로 써 줘. 위트도 살짝, 감성도 살짝, 현실 공감도 꼭 들어가면 좋아.`,
+    en: `You are a dating compatibility content writer. Write in a friendly, casual tone as if introducing friends to each other. Include wit, emotion, and relatable real-life scenarios.`,
+    ja: `あなたは恋愛相性コンテンツのライターです。友達に紹介するような親しみやすく楽しい口調で書いてください。機知に富み、感情的で、現実的な共感を含めてください。`,
+    zh: `你是一个恋爱配对内容作家。用友好、轻松的语调写作，就像向朋友介绍一样。包含机智、情感和现实生活中的共鸣场景。`,
+    es: `Eres un escritor de contenido de compatibilidad amorosa. Escribe en un tono amigable y casual como si presentaras amigos. Incluye ingenio, emoción y escenarios realistas identificables.`,
+    fr: `Tu es un rédacteur de contenu de compatibilité amoureuse. Écris d'un ton amical et décontracté comme si tu présentais des amis. Inclus de l'esprit, de l'émotion et des scénarios réalistes auxquels on peut s'identifier.`,
+    de: `Du bist ein Autor für Dating-Kompatibilitätsinhalte. Schreibe in einem freundlichen, lockeren Ton, als würdest du Freunde vorstellen. Füge Witz, Emotion und nachvollziehbare realistische Szenarien hinzu.`,
+    it: `Sei uno scrittore di contenuti sulla compatibilità amorosa. Scrivi in un tono amichevole e casual come se stessi presentando degli amici. Includi spirito, emozione e scenari realistici riconoscibili.`,
+    pt: `Você é um escritor de conteúdo de compatibilidade amorosa. Escreva em um tom amigável e casual como se estivesse apresentando amigos. Inclua inteligência, emoção e cenários realistas identificáveis.`,
+    ru: `Вы автор контента о совместимости в отношениях. Пишите дружелюбным, непринужденным тоном, как будто представляете друзей. Включите остроумие, эмоции и узнаваемые реалистичные сценарии.`
+  };
 
-너무 분석적이고 딱딱한 말투 말고,  
-친구한테 소개해주는 듯한 부드럽고 재밌는 말투로 써 줘.  
-위트도 살짝, 감성도 살짝, 현실 공감도 꼭 들어가면 좋아.  
+  const prompt = `
+${languagePrompts[language as keyof typeof languagePrompts] || languagePrompts.ko}
 
 ---
 
-🎯 다음 두 사람의 MBTI 조합에 맞춰 아래 형식으로 궁합 결과를 작성해줘:
+🎯 Create compatibility analysis for this MBTI combination:
 
 MBTI1: ${type1}  
 MBTI2: ${type2}
