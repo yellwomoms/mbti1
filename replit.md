@@ -108,3 +108,9 @@ The application is designed to be easily deployable on platforms like Replit, Ve
 - 감성적이고 재치 있는 프롬프트로 업데이트
 - 볼드 처리를 MBTI 타입에서 중요 감정 키워드로 변경
 - 응답 시간 최적화 및 토큰 사용량 개선
+
+### 2024-01-14: 친근한 말투 프롬프트 적용
+- "친구한테 소개해주는 듯한 부드럽고 재밌는 말투"로 개선
+- 현실적인 연애 조언과 구체적인 상황 묘사 추가
+- 5가지 연애 꿀팁 형식으로 더욱 실용적인 조언 제공
+- 감성적 tagline과 highlight 섹션으로 매력적인 콘텐츠 완성
