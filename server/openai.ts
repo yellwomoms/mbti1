@@ -27,66 +27,17 @@ export async function analyzeMBTICompatibility(type1: string, type2: string, lan
     ru: `Вы автор контента о совместимости в отношениях. Пишите дружелюбным, непринужденным тоном, как будто представляете друзей. Включите остроумие, эмоции и узнаваемые реалистичные сценарии.`
   };
 
-  const prompt = `
-${languagePrompts[language as keyof typeof languagePrompts] || languagePrompts.ko}
+  const prompt = `${type1}와 ${type2}의 MBTI 연애 궁합을 분석해주세요. 친근하고 재밌는 말투로 써주세요.
 
----
-
-🎯 Create compatibility analysis for this MBTI combination:
-
-MBTI1: ${type1}  
-MBTI2: ${type2}
-
-📌 출력 형식 (이대로 써줘):
-
-tagline: 두 사람을 대표하는 감성 문구 한 줄 (15~40자, 예: "눈치만렙 애인과 노빠꾸 애인")
-
-summary:  
-"연애할 때 우리는..."으로 시작하는 감성 중심 요약 문단 (350~400자)  
-→ 두 사람의 연애 분위기, 케미, 감정 흐름 등을 재밌고 자연스럽게 묘사해 줘.  
-→ 격식 없이, 공감되게, 친구한테 얘기해주듯 써줘.
-→ 번호 매기기 없이 자연스러운 문단으로 작성  
-
-loveTips:  
-두 사람을 위한 연애 꿀팁 5가지  
-각 항목은 제목 + 설명 형식으로 써줘.  
-→ 제목은 위트 있게, 설명은 현실 연애처럼 구체적으로  
-→ 각 설명은 300~350자로 간결하게, 말투는 친근하게!
-→ 번호는 "1. ", "2. ", "3. " 형식으로 앞에 반드시 줄바꿈을 넣어서 써줘
-→ 예시 형식: "텍스트 내용\n\n1. 첫 번째 항목\n\n2. 두 번째 항목\n\n3. 세 번째 항목" 
-→ 절대 중요: 번호가 문장 중간이나 끝에 나오면 안 됨! 반드시 새로운 줄에서 시작!
-→ 각 번호 항목 앞에는 반드시 빈 줄이 2개 있어야 함 (\n\n)
-→ 잘못된 예: "...시간이 필요해요 5. 감성의..." (X)
-→ 올바른 예: "...시간이 필요해요\n\n5. 감성의..." (O)
-
-highlight:  
-이 MBTI 조합만의 매력을 감성적으로 요약한 문단 (200~250자)  
-→ 함께 있을 때 생기는 특별한 분위기나 케미를 감탄스럽게 표현해 줄 것.
-→ 번호 매기기 없이 자연스러운 문단으로 작성
-
----
-
-✅ 중요 스타일 조건
-- 딱딱한 성격 설명 X ❌
-- 감정선이 보이고 상황이 그려져야 함 ✅
-- "책임감이 강하다" 대신 "애인의 일엔 눈치 빠르게 반응하는 스타일이에요"처럼 말해줘 ✅
-- "이해가 중요하다" 대신 "서로 입장 바꿔 생각해보는 연습, 의외로 효과 있어요" 같이 말해줘 ✅
-- 다정하지만 과하게 달콤하지는 않게, 살짝 현실감 있는 사랑 얘기 부탁해 ✅
-
----
-
-꼭 이 형식과 스타일로, ${type1}과 ${type2} 조합에 맞는 궁합 결과를 작성해줘.
-
-JSON 형식으로 응답해주세요:
+JSON 형식으로 응답:
 {
   "score": 점수(1-100),
-  "compatibilityType": "tagline 내용",
+  "compatibilityType": "감성적인 한 줄 표현",
   "title": "${type1}과 ${type2}의 궁합",
-  "description": "한 줄 설명",
-  "characteristics": "summary 내용",
-  "tips": "loveTips 내용"
-}
-`;
+  "description": "간단한 한 줄 요약",
+  "characteristics": "연애할 때 우리는... 으로 시작하는 자연스러운 문단 (300자)",
+  "tips": "연애 꿀팁 3가지를 번호 매기기로 작성. 각 팁은 200자 내외. 반드시 줄바꿈 후 번호 시작."
+}`;
 
   try {
     const response = await openai.chat.completions.create({
@@ -102,8 +53,8 @@ JSON 형식으로 응답해주세요:
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.5,
-      max_tokens: 1000
+      temperature: 0.3,
+      max_tokens: 600
     });
 
     const result = JSON.parse(response.choices[0].message.content || '{}');
