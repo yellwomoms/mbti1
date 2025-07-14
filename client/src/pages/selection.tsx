@@ -4,8 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MBTI_TYPES } from "@/lib/mbti-data";
 import { Heart, User, Sparkles } from "lucide-react";
-import { AdSpace } from "@/components/AdSpace";
-import { t } from "@/lib/i18n-simple";
 
 export default function SelectionPage() {
   const [, setLocation] = useLocation();
@@ -41,16 +39,12 @@ export default function SelectionPage() {
             <Heart className="w-8 h-8 text-[var(--gradient-from)]" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            {t('title')}
+            MBTI 궁합 테스트
           </h1>
           <p className="text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
-            {t('subtitle')}
+            AI가 실시간으로 두 사람의 연애 궁합을 분석해드립니다. 
+            최신 MBTI 이론을 바탕으로 맞춤형 분석과 실용적인 연애 조언을 제공합니다.
           </p>
-        </div>
-
-        {/* Top Banner Ad */}
-        <div className="mb-8">
-          <AdSpace slot="top-banner" className="max-w-2xl mx-auto" />
         </div>
 
         {/* MBTI Selection Cards */}
@@ -61,8 +55,8 @@ export default function SelectionPage() {
               <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <User className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">{t('person1')}</h3>
-              <p className="text-gray-600">{t('person1Desc')}</p>
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">나의 MBTI</h3>
+              <p className="text-gray-600">첫 번째 사람의 성격 유형을 선택해주세요</p>
             </div>
             
             <div className="grid grid-cols-4 gap-3 mb-6">
@@ -81,8 +75,8 @@ export default function SelectionPage() {
             
             <div className="text-center">
               <p className="text-sm text-gray-500">
-                {t('selectedType')}: <span className="font-bold text-lg text-purple-600">
-                  {selectedTypes.person1 || t('none')}
+                선택된 유형: <span className="font-bold text-lg text-purple-600">
+                  {selectedTypes.person1 || '없음'}
                 </span>
               </p>
             </div>
@@ -120,11 +114,6 @@ export default function SelectionPage() {
               </p>
             </div>
           </Card>
-        </div>
-
-        {/* Bottom Ad */}
-        <div className="mb-8">
-          <AdSpace slot="bottom-selection" className="max-w-xl mx-auto" />
         </div>
 
         {/* Analyze Button */}
