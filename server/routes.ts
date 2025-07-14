@@ -20,32 +20,10 @@ Sitemap: https://mbti-master.replit.app/sitemap.xml`);
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mbti-master.replit.app/</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mbti-master.replit.app/results/ENFP/INFP</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mbti-master.replit.app/results/ENFJ/INFJ</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mbti-master.replit.app/results/ENTP/INTP</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mbti-master.replit.app/results/ENTJ/INTJ</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://mbti-master.replit.app/result/enfp-infj</loc>
     <priority>0.8</priority>
   </url>
 </urlset>`);
