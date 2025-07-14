@@ -185,17 +185,28 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               <h3 className="text-2xl font-bold text-gray-800">연애할 때 이런 특징이 있어요</h3>
             </div>
             
-            <div className="space-y-6">
-              {compatibility.characteristics.split('. ').map((sentence, index) => {
-                if (sentence.trim()) {
-                  return (
-                    <p key={index} className="text-gray-700 text-base leading-relaxed">
-                      {sentence.trim()}{sentence.includes('.') ? '' : '.'}
-                    </p>
-                  );
+            <div className="space-y-4">
+              {compatibility.characteristics.split(/(?<=\.)\s+(?=[A-Z가-힣])/g).reduce((acc, sentence, index) => {
+                const trimmed = sentence.trim();
+                if (!trimmed) return acc;
+                
+                // 2-3개 문장씩 묶어서 처리
+                const groupIndex = Math.floor(index / 3);
+                if (!acc[groupIndex]) {
+                  acc[groupIndex] = [];
                 }
-                return null;
-              }).filter(Boolean)}
+                acc[groupIndex].push(trimmed);
+                return acc;
+              }, [] as string[][]).map((group, groupIndex) => (
+                <p key={groupIndex} className="text-gray-700 text-base leading-relaxed">
+                  {group.map((sentence, sentenceIndex) => (
+                    <span key={sentenceIndex}>
+                      {sentence}
+                      {sentenceIndex < group.length - 1 ? ' ' : ''}
+                    </span>
+                  ))}
+                </p>
+              ))}
             </div>
           </Card>
 
@@ -208,25 +219,33 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               <h3 className="text-2xl font-bold text-gray-800">연애 꿀팁</h3>
             </div>
             
-            <div className="space-y-6">
-              {compatibility.tips.split('. ').map((sentence, index) => {
-                if (sentence.trim()) {
-                  const cleanSentence = sentence.trim();
-                  // 강조할 키워드들을 볼드 처리
-                  const highlightedText = cleanSentence
-                    .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰)/g, '<strong>$1</strong>')
-                    .replace(/([A-Z]{4})/g, '<strong>$1</strong>'); // MBTI 타입 강조
-                  
-                  return (
-                    <p key={index} className="text-gray-700 text-base leading-relaxed">
-                      <span dangerouslySetInnerHTML={{
-                        __html: highlightedText + (cleanSentence.includes('.') ? '' : '.')
-                      }} />
-                    </p>
-                  );
+            <div className="space-y-4">
+              {compatibility.tips.split(/(?<=\.)\s+(?=[A-Z가-힣])/g).reduce((acc, sentence, index) => {
+                const trimmed = sentence.trim();
+                if (!trimmed) return acc;
+                
+                // 2-3개 문장씩 묶어서 처리
+                const groupIndex = Math.floor(index / 3);
+                if (!acc[groupIndex]) {
+                  acc[groupIndex] = [];
                 }
-                return null;
-              }).filter(Boolean)}
+                acc[groupIndex].push(trimmed);
+                return acc;
+              }, [] as string[][]).map((group, groupIndex) => {
+                const combinedText = group.join(' ');
+                // 강조할 키워드들을 볼드 처리
+                const highlightedText = combinedText
+                  .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰)/g, '<strong>$1</strong>')
+                  .replace(/([A-Z]{4})/g, '<strong>$1</strong>'); // MBTI 타입 강조
+                
+                return (
+                  <p key={groupIndex} className="text-gray-700 text-base leading-relaxed">
+                    <span dangerouslySetInnerHTML={{
+                      __html: highlightedText
+                    }} />
+                  </p>
+                );
+              })}
             </div>
           </Card>
 
