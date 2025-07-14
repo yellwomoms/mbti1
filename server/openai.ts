@@ -13,21 +13,19 @@ export interface MBTIAnalysisResult {
 }
 
 export async function analyzeMBTICompatibility(type1: string, type2: string): Promise<MBTIAnalysisResult> {
-  const prompt = `
-${type1}+${type2} 연애궁합을 분석해주세요.
+  const prompt = `${type1}+${type2} 연애궁합 분석
 
-다음 형식으로 정확히 JSON 응답해주세요:
+JSON 응답:
 {
   "score": 75,
   "compatibilityType": "감성문구 15-30자",
   "title": "${type1}과 ${type2}의 궁합",
   "description": "한줄설명",
-  "characteristics": "연애할 때 이런 특징이 있어요 로 시작하는 500-600자 내용",
-  "tips": "연애꿀팁 1개 제목+설명 포함 700-800자 내용"
+  "characteristics": "연애할 때 이런 특징이 있어요 로 시작, 500-600자",
+  "tips": "연애꿀팁 제목+설명 700-800자"
 }
 
-친근한 말투로 작성하고, JSON 형식을 정확히 지켜주세요.
-`;
+친근한 말투로 작성.`;
 
   try {
     const response = await openai.chat.completions.create({
@@ -39,8 +37,8 @@ ${type1}+${type2} 연애궁합을 분석해주세요.
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.3,
-      max_tokens: 1000
+      temperature: 0.2,
+      max_tokens: 900
     });
 
     const content = response.choices[0].message.content || '{}';
