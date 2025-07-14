@@ -102,7 +102,7 @@ JSON 형식으로 응답해주세요:
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.7,
+      temperature: 0.3,
       max_tokens: 1500
     });
 
