@@ -5,6 +5,53 @@ import { getMBTICompatibility } from "../client/src/lib/mbti-data";
 import { analyzeMBTICompatibility } from "./openai";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // robots.txt 라우트
+  app.get('/robots.txt', (req, res) => {
+    res.type('text/plain');
+    res.send(`User-agent: *
+Allow: /
+
+Sitemap: https://mbti-master.replit.app/sitemap.xml`);
+  });
+
+  // sitemap.xml 라우트
+  app.get('/sitemap.xml', (req, res) => {
+    res.type('application/xml');
+    res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mbti-master.replit.app/</loc>
+    <lastmod>2024-01-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mbti-master.replit.app/results/ENFP/INFP</loc>
+    <lastmod>2024-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mbti-master.replit.app/results/ENFJ/INFJ</loc>
+    <lastmod>2024-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mbti-master.replit.app/results/ENTP/INTP</loc>
+    <lastmod>2024-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mbti-master.replit.app/results/ENTJ/INTJ</loc>
+    <lastmod>2024-01-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>`);
+  });
+
   // 구글 사이트 인증 파일 제공 (다중 경로 대응)
   const googleVerificationHandler = (req: any, res: any) => {
     console.log('Google verification route hit:', req.url);
