@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MBTI_TYPES } from "@/lib/mbti-data";
 import { Heart, User, Sparkles } from "lucide-react";
+import { AdSpace } from "@/components/AdSpace";
 
 export default function SelectionPage() {
   const [, setLocation] = useLocation();
@@ -45,6 +46,11 @@ export default function SelectionPage() {
             AI가 실시간으로 두 사람의 연애 궁합을 분석해드립니다. 
             최신 MBTI 이론을 바탕으로 맞춤형 분석과 실용적인 연애 조언을 제공합니다.
           </p>
+        </div>
+
+        {/* Top Banner Ad */}
+        <div className="mb-8">
+          <AdSpace slot="top-banner" className="max-w-2xl mx-auto" />
         </div>
 
         {/* MBTI Selection Cards */}
@@ -114,6 +120,11 @@ export default function SelectionPage() {
               </p>
             </div>
           </Card>
+        </div>
+
+        {/* Bottom Ad */}
+        <div className="mb-8">
+          <AdSpace slot="bottom-selection" className="max-w-xl mx-auto" />
         </div>
 
         {/* Analyze Button */}

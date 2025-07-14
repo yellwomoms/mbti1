@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import type { MBTICompatibility } from "@shared/schema";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import { AdSpace } from "@/components/AdSpace";
 
 interface ResultsPageProps {
   params: {
@@ -266,6 +267,11 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             </div>
           </Card>
 
+          {/* Middle Ad */}
+          <div className="my-8">
+            <AdSpace slot="middle-results" style="display" />
+          </div>
+
           {/* Special Combination Insight */}
           <div className="bg-white rounded-3xl p-8 shadow-xl hover-lift animate-slide-up border-2 border-purple-200" style={{animationDelay: '0.3s'}}>
             <div className="flex items-center mb-6">
@@ -286,6 +292,11 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Bottom Ad */}
+        <div className="my-8">
+          <AdSpace slot="bottom-results" className="max-w-2xl mx-auto" />
         </div>
 
         {/* Share and Action Buttons */}
