@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { ArrowLeft, Users, Star, Heart, Brain, MessageCircle, Scale, Share2, RotateCcw, Lightbulb } from "lucide-react";
+import { ArrowLeft, Users, Star, Heart, Brain, MessageCircle, Scale, Share2, RotateCcw, Lightbulb, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import type { MBTICompatibility } from "@shared/schema";
+import { LoadingScreen } from "@/components/LoadingScreen";
 
 interface ResultsPageProps {
   params: {
@@ -44,15 +45,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen gradient-bg flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-lg">AI가 궁합을 분석하고 있습니다...</p>
-          <p className="text-sm text-white/70 mt-2">최신 MBTI 이론을 바탕으로 맞춤 분석 중</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen type1={type1} type2={type2} />;
   }
 
   if (error || !compatibility) {
@@ -224,32 +217,52 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               <h3 className="text-2xl font-bold text-gray-800">연애 꿀팁</h3>
             </div>
             
-            <div className="space-y-4">
-              {compatibility.tips.split(/(?<=\.)\s+(?=[A-Z가-힣])/g).reduce((acc, sentence, index) => {
-                const trimmed = sentence.trim();
-                if (!trimmed) return acc;
-                
-                // 2-3개 문장씩 묶어서 처리
-                const groupIndex = Math.floor(index / 3);
-                if (!acc[groupIndex]) {
-                  acc[groupIndex] = [];
-                }
-                acc[groupIndex].push(trimmed);
-                return acc;
-              }, [] as string[][]).map((group, groupIndex) => {
-                const combinedText = group.join(' ');
-                // 중요한 키워드들을 볼드 처리 (MBTI 타입 제외)
-                const highlightedText = combinedText
-                  .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰|중요|필요|노력|표현|공감|경청|조화|균형|깊이|의미|특별|완벽|최고|놀라운|매력|시너지)/g, '<strong>$1</strong>');
-                
-                return (
-                  <p key={groupIndex} className="text-gray-700 text-base leading-relaxed">
-                    <span dangerouslySetInnerHTML={{
-                      __html: highlightedText
-                    }} />
-                  </p>
-                );
-              })}
+            <div className="space-y-6">
+              {Array.isArray(compatibility.tips) 
+                ? compatibility.tips.map((tip: any, index: number) => (
+                    <div key={index} className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl p-6 border border-emerald-200 dark:border-emerald-800">
+                      <h4 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-3 text-lg">
+                        {tip.title || `꿀팁 ${index + 1}`}
+                      </h4>
+                      <div className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                        <span dangerouslySetInnerHTML={{
+                          __html: String(tip.content || tip)
+                            .replace(/(\d+\.\s)/g, '<br/>$1') // Add line break before numbers
+                            .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰|중요|필요|노력|표현|공감|경청|조화|균형|깊이|의미|특별|완벽|최고|놀라운|매력|시너지)/g, '<strong>$1</strong>')
+                        }} />
+                      </div>
+                    </div>
+                  ))
+                : typeof compatibility.tips === 'string' 
+                  ? compatibility.tips.split(/(?<=\.)\s+(?=[A-Z가-힣])/g).reduce((acc, sentence, index) => {
+                      const trimmed = sentence.trim();
+                      if (!trimmed) return acc;
+                      
+                      const groupIndex = Math.floor(index / 3);
+                      if (!acc[groupIndex]) {
+                        acc[groupIndex] = [];
+                      }
+                      acc[groupIndex].push(trimmed);
+                      return acc;
+                    }, [] as string[][]).map((group, groupIndex) => {
+                      const combinedText = group.join(' ');
+                      const highlightedText = combinedText
+                        .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰|중요|필요|노력|표현|공감|경청|조화|균형|깊이|의미|특별|완벽|최고|놀라운|매력|시너지)/g, '<strong>$1</strong>');
+                      
+                      return (
+                        <p key={groupIndex} className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                          <span dangerouslySetInnerHTML={{
+                            __html: highlightedText
+                          }} />
+                        </p>
+                      );
+                    })
+                  : (
+                    <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                      연애 꿀팁을 준비하고 있어요...
+                    </p>
+                  )
+              }
             </div>
           </Card>
 

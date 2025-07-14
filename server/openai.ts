@@ -41,6 +41,8 @@ loveTips:
 각 항목은 제목 + 설명 형식으로 써줘.  
 → 제목은 위트 있게, 설명은 현실 연애처럼 구체적으로  
 → 각 설명은 350~450자, 말투는 친근하게!
+→ 번호는 "1. ", "2. ", "3. " 형식으로 앞에 줄바꿈을 넣어서 써줘
+→ 예: "일단 텍스트 내용\n\n1. 첫 번째 항목\n\n2. 두 번째 항목" 형식
 
 highlight:  
 이 MBTI 조합만의 매력을 감성적으로 요약한 문단 (150~200자)  
@@ -84,8 +86,8 @@ JSON 형식으로 응답해주세요:
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.8,
-      max_tokens: 2500
+      temperature: 0.7,
+      max_tokens: 1500
     });
 
     const result = JSON.parse(response.choices[0].message.content || '{}');
