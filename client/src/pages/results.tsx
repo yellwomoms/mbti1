@@ -62,57 +62,79 @@ export default function ResultsPage({ params }: ResultsPageProps) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen gradient-bg flex items-center justify-center">
-        <div className="text-white text-center max-w-md mx-auto px-6">
-          {/* MBTI 타입 표시 */}
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 flex items-center justify-center">
+        <div className="text-center max-w-lg mx-auto px-6">
+          {/* MBTI 타입 표시 - 더 귀엽게 */}
           <div className="mb-8">
             <div className="flex justify-center items-center space-x-4 mb-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2 border border-white/30">
-                <span className="text-2xl font-bold text-pink-200">{type1}</span>
+              <div className="bg-gradient-to-r from-pink-400 to-pink-500 text-white rounded-2xl px-6 py-3 shadow-lg transform hover:scale-105 transition-transform">
+                <span className="text-2xl font-bold">{type1}</span>
               </div>
-              <Heart className="w-6 h-6 text-pink-300 animate-pulse" />
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-2 border border-white/30">
-                <span className="text-2xl font-bold text-pink-200">{type2}</span>
+              <div className="relative">
+                <Heart className="w-8 h-8 text-pink-400 animate-bounce" />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
+              </div>
+              <div className="bg-gradient-to-r from-purple-400 to-purple-500 text-white rounded-2xl px-6 py-3 shadow-lg transform hover:scale-105 transition-transform">
+                <span className="text-2xl font-bold">{type2}</span>
               </div>
             </div>
           </div>
           
           {/* 사랑스러운 하트 애니메이션 */}
           <div className="relative mb-8">
-            <div className="flex justify-center space-x-1">
-              <Heart className="w-6 h-6 text-pink-300 animate-pulse" style={{animationDelay: '0s'}} />
-              <Heart className="w-8 h-8 text-pink-200 animate-pulse" style={{animationDelay: '0.2s'}} />
-              <Heart className="w-6 h-6 text-pink-300 animate-pulse" style={{animationDelay: '0.4s'}} />
+            <div className="flex justify-center space-x-2">
+              <Heart className="w-4 h-4 text-pink-400 animate-pulse" style={{animationDelay: '0s'}} />
+              <Heart className="w-5 h-5 text-pink-500 animate-pulse" style={{animationDelay: '0.1s'}} />
+              <Heart className="w-6 h-6 text-pink-600 animate-pulse" style={{animationDelay: '0.2s'}} />
+              <Heart className="w-7 h-7 text-pink-500 animate-pulse" style={{animationDelay: '0.3s'}} />
+              <Heart className="w-6 h-6 text-pink-400 animate-pulse" style={{animationDelay: '0.4s'}} />
+              <Heart className="w-5 h-5 text-pink-500 animate-pulse" style={{animationDelay: '0.5s'}} />
+              <Heart className="w-4 h-4 text-pink-400 animate-pulse" style={{animationDelay: '0.6s'}} />
             </div>
-            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
-              <div className="w-12 h-12 rounded-full bg-white/20 animate-ping"></div>
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-pink-200 to-purple-200 animate-ping opacity-30"></div>
             </div>
           </div>
           
-          {/* 메인 메시지 */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20">
-            <p className="text-xl font-semibold mb-2">💝 AI가 궁합을 분석하고 있습니다...</p>
-            <p className="text-sm text-white/80 mb-4">최신 MBTI 이론을 바탕으로 맞춤 분석 중</p>
+          {/* 메인 메시지 - 밝고 사랑스럽게 */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-pink-200 shadow-xl">
+            <div className="text-2xl font-bold text-gray-800 mb-2">
+              💕 AI가 궁합을 분석하고 있어요!
+            </div>
+            <p className="text-gray-600 mb-6">두 사람만의 특별한 연애 스토리를 준비하고 있답니다</p>
             
-            {/* 진행률 표시 */}
-            <div className="mb-4">
-              <div className="flex justify-between text-sm text-white/70 mb-1">
-                <span>분석 진행률</span>
-                <span>{Math.round(progress)}%</span>
+            {/* 진행률 표시 - 더 사랑스럽게 */}
+            <div className="mb-6">
+              <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <span className="font-medium">💝 분석 진행률</span>
+                <span className="font-bold text-pink-600">{Math.round(progress)}%</span>
               </div>
-              <div className="w-full bg-white/20 rounded-full h-3">
+              <div className="w-full bg-pink-100 rounded-full h-4 overflow-hidden">
                 <div 
-                  className="bg-gradient-to-r from-pink-400 to-purple-400 h-3 rounded-full transition-all duration-500 ease-out"
+                  className="bg-gradient-to-r from-pink-400 via-pink-500 to-purple-500 h-4 rounded-full transition-all duration-500 ease-out shadow-sm"
                   style={{width: `${progress}%`}}
                 ></div>
               </div>
             </div>
             
-            {/* 재미있는 로딩 텍스트 */}
-            <div className="text-sm text-white/70 space-y-1">
-              <p>🔮 두 사람의 궁합을 깊이 파헤치는 중...</p>
-              <p>💕 최고의 연애 꿀팁을 준비하고 있어요!</p>
-              <p>✨ 특별한 매력 포인트를 발견했어요!</p>
+            {/* 재미있는 로딩 텍스트 - 더 귀엽게 */}
+            <div className="text-sm text-gray-600 space-y-2">
+              <p className="flex items-center justify-center gap-2">
+                <span className="text-lg">🔮</span>
+                <span>두 사람의 궁합을 깊이 파헤치는 중이에요...</span>
+              </p>
+              <p className="flex items-center justify-center gap-2">
+                <span className="text-lg">💕</span>
+                <span>최고의 연애 꿀팁을 준비하고 있어요!</span>
+              </p>
+              <p className="flex items-center justify-center gap-2">
+                <span className="text-lg">✨</span>
+                <span>특별한 매력 포인트를 발견했어요!</span>
+              </p>
+              <p className="flex items-center justify-center gap-2">
+                <span className="text-lg">🌟</span>
+                <span>두 사람만의 로맨틱한 스토리를 만들어요!</span>
+              </p>
             </div>
           </div>
         </div>
