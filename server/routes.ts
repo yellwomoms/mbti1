@@ -22,43 +22,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // First check storage
       let compatibility = await storage.getMBTICompatibility(type1, type2);
       
-      // If not in storage, get from OpenAI API and store it
+      // If not in storage, provide basic data first for fast response
       if (!compatibility) {
-        try {
-          const aiAnalysis = await analyzeMBTICompatibility(type1, type2);
-          
-          // Store in memory storage
-          compatibility = await storage.createMBTICompatibility({
-            type1,
-            type2,
-            score: aiAnalysis.score,
-            compatibilityType: aiAnalysis.compatibilityType,
-            title: aiAnalysis.title,
-            description: aiAnalysis.description,
-            characteristics: aiAnalysis.characteristics,
-            tips: aiAnalysis.tips
-          });
-        } catch (aiError) {
-          console.error("AI 분석 실패, 기본 데이터 사용:", aiError);
-          
-          // AI 분석 실패 시 기본 데이터로 폴백
-          const data = getMBTICompatibility(type1, type2);
-          if (!data) {
-            return res.status(404).json({ message: "Compatibility data not found" });
-          }
-          
-          // Store in memory storage
-          compatibility = await storage.createMBTICompatibility({
-            type1,
-            type2,
-            score: data.score,
-            compatibilityType: data.compatibilityType,
-            title: data.title,
-            description: data.description,
-            characteristics: data.characteristics,
-            tips: data.tips
-          });
+        // Get basic data immediately
+        const data = getMBTICompatibility(type1, type2);
+        if (!data) {
+          return res.status(404).json({ message: "Compatibility data not found" });
         }
+        
+        // Store basic data in memory storage
+        compatibility = await storage.createMBTICompatibility({
+          type1,
+          type2,
+          score: data.score,
+          compatibilityType: data.compatibilityType,
+          title: data.title,
+          description: data.description,
+          characteristics: data.characteristics,
+          tips: data.tips
+        });
+        
+        // Run AI analysis in background (non-blocking)
+        analyzeMBTICompatibility(type1, type2)
+          .then(aiAnalysis => {
+            // Update storage with AI analysis when complete
+            storage.createMBTICompatibility({
+              type1,
+              type2,
+              score: aiAnalysis.score,
+              compatibilityType: aiAnalysis.compatibilityType,
+              title: aiAnalysis.title,
+              description: aiAnalysis.description,
+              characteristics: aiAnalysis.characteristics,
+              tips: aiAnalysis.tips
+            });
+          })
+          .catch(error => {
+            console.log("백그라운드 AI 분석 실패:", error);
+          });
       }
 
       res.json(compatibility);

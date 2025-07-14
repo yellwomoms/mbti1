@@ -198,16 +198,20 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                 }
                 acc[groupIndex].push(trimmed);
                 return acc;
-              }, [] as string[][]).map((group, groupIndex) => (
-                <p key={groupIndex} className="text-gray-700 text-base leading-relaxed">
-                  {group.map((sentence, sentenceIndex) => (
-                    <span key={sentenceIndex}>
-                      {sentence}
-                      {sentenceIndex < group.length - 1 ? ' ' : ''}
-                    </span>
-                  ))}
-                </p>
-              ))}
+              }, [] as string[][]).map((group, groupIndex) => {
+                const combinedText = group.join(' ');
+                // 중요한 키워드들을 볼드 처리 (MBTI 타입 제외)
+                const highlightedText = combinedText
+                  .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰|중요|필요|노력|표현|공감|경청|조화|균형|깊이|의미|특별|완벽|최고|놀라운|매력|시너지|행복|즐거운|따뜻한|달콤한|설레는|뜨거운|차분한|편안한|안정적인|역동적인)/g, '<strong>$1</strong>');
+                
+                return (
+                  <p key={groupIndex} className="text-gray-700 text-base leading-relaxed">
+                    <span dangerouslySetInnerHTML={{
+                      __html: highlightedText
+                    }} />
+                  </p>
+                );
+              })}
             </div>
           </Card>
 
@@ -234,10 +238,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                 return acc;
               }, [] as string[][]).map((group, groupIndex) => {
                 const combinedText = group.join(' ');
-                // 강조할 키워드들을 볼드 처리
+                // 중요한 키워드들을 볼드 처리 (MBTI 타입 제외)
                 const highlightedText = combinedText
-                  .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰)/g, '<strong>$1</strong>')
-                  .replace(/([A-Z]{4})/g, '<strong>$1</strong>'); // MBTI 타입 강조
+                  .replace(/(서로|함께|이해|존중|소통|감정|관계|사랑|배려|지지|격려|신뢰|중요|필요|노력|표현|공감|경청|조화|균형|깊이|의미|특별|완벽|최고|놀라운|매력|시너지)/g, '<strong>$1</strong>');
                 
                 return (
                   <p key={groupIndex} className="text-gray-700 text-base leading-relaxed">
@@ -264,9 +267,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                 🌟 이 조합의 매력 포인트
               </h4>
               <p className="leading-relaxed text-gray-700 text-base">
-                <strong>{type1}</strong>의 특별한 매력과 <strong>{type2}</strong>의 독특한 장점이 만나면 놀라운 시너지를 만들어냅니다. 
-                서로 다른 강점이 완벽하게 보완되어, <strong>함께라면 어떤 목표든 달성할 수 있는 최고의 팀워크</strong>를 자랑합니다. 
-                이 조합은 <strong>깊이 있는 관계</strong>를 만들어갈 수 있는 특별한 잠재력을 가지고 있습니다.
+                {type1}의 <strong>특별한 매력</strong>과 {type2}의 <strong>독특한 장점</strong>이 만나면 <strong>놀라운 시너지</strong>를 만들어냅니다. 
+                서로 다른 강점이 <strong>완벽하게 보완</strong>되어, <strong>함께라면 어떤 목표든 달성할 수 있는 최고의 팀워크</strong>를 자랑합니다. 
+                이 조합은 <strong>깊이 있는 관계</strong>를 만들어갈 수 있는 <strong>특별한 잠재력</strong>을 가지고 있습니다.
               </p>
             </div>
           </div>
