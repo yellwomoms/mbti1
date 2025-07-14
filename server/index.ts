@@ -1,10 +1,22 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import path from "path";
+import fs from "fs";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// 구글 사이트 인증 파일 제공
+app.get('/google8334862f75f6dc65.html', (req, res) => {
+  const filePath = path.resolve(import.meta.dirname, "..", "google8334862f75f6dc65.html");
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.status(404).send("File not found");
+  }
+});
 
 app.use((req, res, next) => {
   const start = Date.now();
