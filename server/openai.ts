@@ -51,7 +51,7 @@ loveTips:
 두 사람을 위한 연애 꿀팁 5가지  
 각 항목은 제목 + 설명 형식으로 써줘.  
 → 제목은 위트 있게, 설명은 현실 연애처럼 구체적으로  
-→ 각 설명은 350~450자, 말투는 친근하게!
+→ 각 설명은 200~300자로 간결하게, 말투는 친근하게!
 → 번호는 "1. ", "2. ", "3. " 형식으로 앞에 반드시 줄바꿈을 넣어서 써줘
 → 예시 형식: "텍스트 내용\n\n1. 첫 번째 항목\n\n2. 두 번째 항목\n\n3. 세 번째 항목" 
 → 절대 중요: 번호가 문장 중간이나 끝에 나오면 안 됨! 반드시 새로운 줄에서 시작!
@@ -102,8 +102,9 @@ JSON 형식으로 응답해주세요:
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.5,
-      max_tokens: 1500
+      temperature: 0.7,
+      max_tokens: 1200,
+      timeout: 4000
     });
 
     const result = JSON.parse(response.choices[0].message.content || '{}');

@@ -1,5 +1,5 @@
-import { useLanguage } from '@/lib/i18n';
 import { useEffect } from 'react';
+import { getCurrentLanguage, t } from '@/lib/i18n-simple';
 
 interface SEOHeadProps {
   title?: string;
@@ -11,77 +11,105 @@ interface SEOHeadProps {
 }
 
 export function SEOHead({ title, description, type1, type2, score, image }: SEOHeadProps) {
-  const { language, t } = useLanguage();
-
   useEffect(() => {
-    // Update page title
-    const pageTitle = title || t('appTitle');
-    document.title = pageTitle;
-
-    // Update meta description
-    const metaDescription = description || (type1 && type2 
-      ? `${type1}와 ${type2}의 MBTI 궁합 분석 결과${score ? ` (${score}점)` : ''}. 상세한 연애 꿀팁과 특징을 확인하세요.`
-      : 'MBTI 궁합 테스트로 두 성격 유형의 연애 궁합을 분석해보세요. 16가지 성격 유형의 모든 조합을 지원합니다.');
-
-    // Update or create meta tags
-    updateMetaTag('description', metaDescription);
-    updateMetaTag('og:title', pageTitle);
-    updateMetaTag('og:description', metaDescription);
-    updateMetaTag('og:type', 'website');
-    updateMetaTag('og:url', window.location.href);
-    updateMetaTag('og:image', image || '/mbti-compatibility-og.jpg');
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', pageTitle);
-    updateMetaTag('twitter:description', metaDescription);
-    updateMetaTag('twitter:image', image || '/mbti-compatibility-og.jpg');
+    const currentLanguage = getCurrentLanguage();
     
-    // Language meta tags
-    updateMetaTag('og:locale', getLocaleFromLanguage(language));
-    document.documentElement.lang = language;
-
-    // Keywords for SEO
-    const keywords = type1 && type2 
-      ? `MBTI, 궁합, ${type1}, ${type2}, 성격유형, 연애, 궁합테스트, 심리테스트`
-      : 'MBTI, 궁합, 성격유형, 연애, 궁합테스트, 심리테스트, 16가지 성격유형';
+    // Get localized content
+    const pageTitle = title || t('seoTitle');
+    const pageDescription = description || t('seoDescription');
+    const pageImage = image || 'https://mbti-master.replit.app/images/og-thumbnail.jpg';
+    const keywords = t('seoKeywords');
+    
+    // Update title
+    document.title = pageTitle;
+    
+    // Update basic meta tags
+    updateMetaTag('description', pageDescription);
     updateMetaTag('keywords', keywords);
-
-    // Canonical URL
-    const canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-    canonical.setAttribute('rel', 'canonical');
-    canonical.setAttribute('href', window.location.href);
+    updateMetaTag('author', 'MBTI Match Team');
+    updateMetaTag('viewport', 'width=device-width, initial-scale=1');
+    
+    // Update language meta tag
+    updateMetaTag('language', getLocaleFromLanguage(currentLanguage));
+    document.documentElement.lang = currentLanguage;
+    
+    // Update Open Graph tags
+    updateMetaTag('og:title', t('ogTitle'));
+    updateMetaTag('og:description', t('ogDescription'));
+    updateMetaTag('og:image', pageImage);
+    updateMetaTag('og:url', window.location.href);
+    updateMetaTag('og:type', 'website');
+    updateMetaTag('og:locale', getLocaleFromLanguage(currentLanguage));
+    
+    // Update Twitter tags
+    updateMetaTag('twitter:title', t('twitterTitle'));
+    updateMetaTag('twitter:description', t('twitterDescription'));
+    updateMetaTag('twitter:image', pageImage);
+    updateMetaTag('twitter:card', 'summary_large_image');
+    
+    // Update canonical URL
+    const canonicalLink = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+    canonicalLink.setAttribute('rel', 'canonical');
+    canonicalLink.setAttribute('href', window.location.href);
     if (!document.querySelector('link[rel="canonical"]')) {
-      document.head.appendChild(canonical);
+      document.head.appendChild(canonicalLink);
     }
-
-    // JSON-LD structured data
-    const jsonLd = {
+    
+    // Update structured data
+    const structuredData = {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": pageTitle,
-      "description": metaDescription,
+      "description": pageDescription,
       "url": window.location.href,
       "applicationCategory": "LifestyleApplication",
-      "operatingSystem": "Any",
+      "operatingSystem": "Web",
+      "inLanguage": getLocaleFromLanguage(currentLanguage),
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
       }
     };
-
-    updateJsonLd(jsonLd);
-  }, [title, description, type1, type2, score, image, language, t]);
+    
+    if (type1 && type2) {
+      structuredData["about"] = {
+        "@type": "Thing",
+        "name": `${type1} × ${type2} MBTI Compatibility`,
+        "description": `Compatibility analysis between ${type1} and ${type2} personality types`
+      };
+      
+      if (score) {
+        structuredData["aggregateRating"] = {
+          "@type": "AggregateRating",
+          "ratingValue": score,
+          "bestRating": 100,
+          "worstRating": 0
+        };
+      }
+    }
+    
+    updateJsonLd(structuredData);
+  }, [title, description, type1, type2, score, image]);
 
   return null;
 }
 
 function updateMetaTag(name: string, content: string) {
-  const property = name.startsWith('og:') || name.startsWith('twitter:') ? 'property' : 'name';
-  let meta = document.querySelector(`meta[${property}="${name}"]`);
+  // Determine the correct attribute type
+  let attributeType = 'name';
+  if (name.startsWith('og:')) {
+    attributeType = 'property';
+  } else if (name.startsWith('twitter:')) {
+    attributeType = 'name';
+  }
+  
+  // Find existing meta tag
+  let meta = document.querySelector(`meta[${attributeType}="${name}"]`);
   
   if (!meta) {
     meta = document.createElement('meta');
-    meta.setAttribute(property, name);
+    meta.setAttribute(attributeType, name);
     document.head.appendChild(meta);
   }
   

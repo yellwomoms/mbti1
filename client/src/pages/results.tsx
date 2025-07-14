@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { ArrowLeft, Users, Star, Heart, Brain, MessageCircle, Scale, Share2, RotateCcw, Lightbulb, Copy } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -316,15 +317,17 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         </div> */}
 
         {/* Share and Action Buttons */}
-        <div className="text-center mt-12 space-y-4 animate-slide-up" style={{animationDelay: '0.4s'}}>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={handleShare}
-              className="bg-white text-[var(--deep-indigo)] px-8 py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-            >
-              <Share2 className="w-4 h-4 mr-3" />
-              {t('shareResult')}
-            </Button>
+        <div className="text-center mt-12 space-y-6 animate-slide-up" style={{animationDelay: '0.4s'}}>
+          <div className="max-w-md mx-auto">
+            <ShareButton 
+              type1={type1} 
+              type2={type2} 
+              score={compatibility?.score} 
+              className="w-full"
+            />
+          </div>
+          
+          <div className="flex justify-center">
             <Button
               onClick={() => setLocation('/')}
               variant="ghost"
@@ -334,6 +337,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               {t('tryOther')}
             </Button>
           </div>
+          
           <p className="text-white/70 text-sm">
             AI가 실시간으로 생성한 <span className="font-semibold">맞춤형</span> MBTI 궁합 분석
           </p>
