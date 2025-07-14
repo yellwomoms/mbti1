@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mbti-master.replit.app/sitemap.xml
