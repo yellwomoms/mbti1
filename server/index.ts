@@ -11,14 +11,21 @@ app.use(express.urlencoded({ extended: false }));
 // 정적 파일 제공 (구글 인증 파일 포함)
 app.use(express.static(path.resolve(import.meta.dirname, "..", "client", "public")));
 
-// 구글 인증 파일을 가장 먼저 처리
+// 구글 인증 파일을 가장 먼저 처리 (모든 변형 지원)
 app.use((req, res, next) => {
-  if (req.url === '/google8334862f75f6dc65.html' || req.path === '/google8334862f75f6dc65.html') {
+  const googleFiles = [
+    '/google8334862f75f6dc65.html',
+    '/google8334862f75f6dc65',
+    '/google-site-verification: google8334862f75f6dc65.html'
+  ];
+  
+  if (googleFiles.includes(req.url) || googleFiles.includes(req.path)) {
     console.log('Google verification file intercepted:', req.url);
     res.writeHead(200, {
       'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'no-cache',
-      'Access-Control-Allow-Origin': '*'
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
     });
     return res.end('google-site-verification: google8334862f75f6dc65.html');
   }
