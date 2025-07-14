@@ -42,6 +42,13 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // 구글 인증 파일을 최우선으로 처리
+  app.get('/google8334862f75f6dc65.html', (req, res) => {
+    console.log('Google verification file accessed directly');
+    res.set('Content-Type', 'text/html; charset=utf-8');
+    res.status(200).end('google-site-verification: google8334862f75f6dc65.html');
+  });
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
