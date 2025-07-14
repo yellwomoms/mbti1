@@ -3,10 +3,15 @@ import { useLocation } from "wouter";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MBTI_TYPES } from "@/lib/mbti-data";
-import { Heart, User, Sparkles } from "lucide-react";
+import { Heart, User, Sparkles, Globe } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
+import { SUPPORTED_LANGUAGES } from "@/lib/language";
+import AdSpace from "@/components/AdSpace";
 
 export default function SelectionPage() {
   const [, setLocation] = useLocation();
+  const { currentLanguage, changeLanguage, t, isLoading } = useLanguage();
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState<{
     person1: string | null;
     person2: string | null;
@@ -30,20 +35,69 @@ export default function SelectionPage() {
 
   const isReady = selectedTypes.person1 && selectedTypes.person2;
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen gradient-bg flex items-center justify-center">
+        <div className="text-white text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-4"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen gradient-bg">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* 상단 광고 */}
+        <div className="flex justify-center">
+          <AdSpace size="leaderboard" position="top" />
+        </div>
+
+        {/* 언어 선택 버튼 */}
+        <div className="flex justify-end mb-4">
+          <div className="relative">
+            <Button
+              onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+              variant="ghost"
+              className="text-white/90 hover:text-white hover:bg-white/10"
+            >
+              <Globe className="w-4 h-4 mr-2" />
+              {SUPPORTED_LANGUAGES.find(lang => lang.code === currentLanguage)?.flag} {SUPPORTED_LANGUAGES.find(lang => lang.code === currentLanguage)?.name}
+            </Button>
+            
+            {showLanguageMenu && (
+              <div className="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 min-w-48">
+                {SUPPORTED_LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      changeLanguage(lang.code);
+                      setShowLanguageMenu(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2 ${
+                      currentLanguage === lang.code ? 'bg-purple-50 text-purple-700' : 'text-gray-700'
+                    }`}
+                  >
+                    <span className="text-lg">{lang.flag}</span>
+                    <span className="font-medium">{lang.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Header Section */}
         <div className="text-center mb-12 animate-slide-up">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-6 shadow-lg">
             <Heart className="w-8 h-8 text-[var(--gradient-from)]" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            MBTI 궁합 테스트
+            {t('title')}
           </h1>
           <p className="text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
-            AI가 실시간으로 두 사람의 연애 궁합을 분석해드립니다. 
-            최신 MBTI 이론을 바탕으로 맞춤형 분석과 실용적인 연애 조언을 제공합니다.
+            {t('subtitle')}
           </p>
         </div>
 
