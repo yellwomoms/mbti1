@@ -1,0 +1,101 @@
+# MBTI Compatibility Test Application
+
+## Overview
+
+This is a full-stack MBTI (Myers-Briggs Type Indicator) compatibility testing application built with React, Express, and PostgreSQL. The application allows users to select two MBTI personality types and view detailed compatibility analysis between them, including compatibility scores, relationship dynamics, and practical dating advice.
+
+## User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+## System Architecture
+
+### Frontend Architecture
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite for fast development and optimized builds
+- **UI Library**: Shadcn/UI components with Radix UI primitives
+- **Styling**: Tailwind CSS with custom CSS variables for theming
+- **State Management**: TanStack Query (React Query) for server state management
+- **Routing**: Wouter for lightweight client-side routing
+- **Form Handling**: React Hook Form with Zod validation
+
+### Backend Architecture
+- **Runtime**: Node.js with Express.js framework
+- **Language**: TypeScript with ES modules
+- **API Design**: RESTful API endpoints
+- **Database ORM**: Drizzle ORM for type-safe database operations
+- **Session Management**: Express sessions with PostgreSQL storage
+- **Development**: Hot reload with tsx and Vite middleware integration
+
+### Database Design
+- **Primary Database**: PostgreSQL via Neon Database serverless
+- **Schema Management**: Drizzle Kit for migrations and schema definitions
+- **Tables**:
+  - `users`: User authentication and profiles
+  - `mbti_compatibility`: Cached compatibility analysis data
+- **Backup Storage**: In-memory storage fallback for development
+
+## Key Components
+
+### Data Management
+- **MBTI Data**: Comprehensive compatibility matrix covering all 256 type combinations
+- **Compatibility Scoring**: Numerical scoring system (1-100) with categorized relationship types
+- **Content Structure**: Detailed analysis including characteristics, tips, and relationship dynamics
+
+### UI Components
+- **Selection Interface**: Interactive MBTI type selector with visual feedback
+- **Results Display**: Detailed compatibility analysis with scores and recommendations
+- **Responsive Design**: Mobile-first approach with adaptive layouts
+- **Toast Notifications**: User feedback for actions like sharing and copying links
+
+### Performance Features
+- **Query Caching**: React Query for efficient data fetching and caching
+- **Lazy Loading**: Component-level code splitting
+- **Image Optimization**: Asset management through Vite
+- **Development Tools**: Hot module replacement and error overlays
+
+## Data Flow
+
+1. **User Selection**: Users select two MBTI types on the selection page
+2. **Route Navigation**: Application navigates to results page with type parameters
+3. **Data Fetching**: React Query fetches compatibility data from API endpoint
+4. **Cache Strategy**: Data is first checked in database, then falls back to static data
+5. **Storage**: Retrieved data is cached in both database and React Query cache
+6. **Display**: Comprehensive compatibility analysis is rendered with interactive elements
+
+## External Dependencies
+
+### Core Framework Dependencies
+- **React Ecosystem**: React, React DOM, React Hook Form
+- **UI Components**: Radix UI primitives, Lucide React icons
+- **Development**: Vite, TypeScript, ESBuild for production builds
+- **Database**: Neon Database serverless PostgreSQL, Drizzle ORM
+
+### Utility Libraries
+- **Styling**: Tailwind CSS, Class Variance Authority, clsx
+- **Data Fetching**: TanStack React Query
+- **Date Handling**: date-fns for date manipulation
+- **Validation**: Zod for schema validation
+- **Carousel**: Embla Carousel for interactive components
+
+## Deployment Strategy
+
+### Development Environment
+- **Local Development**: Vite dev server with Express backend proxy
+- **Hot Reload**: Full-stack hot module replacement
+- **Error Handling**: Runtime error overlays and detailed logging
+- **Database**: Development-friendly in-memory fallback with PostgreSQL primary
+
+### Production Build
+- **Frontend**: Vite production build with optimized assets
+- **Backend**: ESBuild bundling for Node.js deployment
+- **Static Assets**: Served through Express with optimized caching
+- **Database**: PostgreSQL with connection pooling and error handling
+
+### Environment Configuration
+- **Database URL**: Environment variable for database connection
+- **Session Management**: Secure session configuration for production
+- **CORS**: Configured for appropriate origins in production
+- **Logging**: Request/response logging with performance metrics
+
+The application is designed to be easily deployable on platforms like Replit, Vercel, or similar hosting services with automatic environment detection and appropriate middleware configuration.
