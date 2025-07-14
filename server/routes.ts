@@ -22,44 +22,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // First check storage
       let compatibility = await storage.getMBTICompatibility(type1, type2);
       
-      // If not in storage, provide basic data first for fast response
+      // If not in storage, get from AI analysis
       if (!compatibility) {
-        // Get basic data immediately
-        const data = getMBTICompatibility(type1, type2);
-        if (!data) {
-          return res.status(404).json({ message: "Compatibility data not found" });
-        }
-        
-        // Store basic data in memory storage
-        compatibility = await storage.createMBTICompatibility({
-          type1,
-          type2,
-          score: data.score,
-          compatibilityType: data.compatibilityType,
-          title: data.title,
-          description: data.description,
-          characteristics: data.characteristics,
-          tips: data.tips
-        });
-        
-        // Run AI analysis in background (non-blocking)
-        analyzeMBTICompatibility(type1, type2)
-          .then(aiAnalysis => {
-            // Update storage with AI analysis when complete
-            storage.createMBTICompatibility({
+        try {
+          // Always use AI analysis for all combinations
+          const aiAnalysis = await analyzeMBTICompatibility(type1, type2);
+          
+          // Store AI analysis result
+          compatibility = await storage.createMBTICompatibility({
+            type1,
+            type2,
+            score: aiAnalysis.score,
+            compatibilityType: aiAnalysis.compatibilityType,
+            title: aiAnalysis.title,
+            description: aiAnalysis.description,
+            characteristics: aiAnalysis.characteristics,
+            tips: aiAnalysis.tips
+          });
+        } catch (aiError) {
+          console.error("AI 분석 실패:", aiError);
+          
+          // Only use basic data as fallback if AI fails
+          const data = getMBTICompatibility(type1, type2);
+          if (data) {
+            compatibility = await storage.createMBTICompatibility({
               type1,
               type2,
-              score: aiAnalysis.score,
-              compatibilityType: aiAnalysis.compatibilityType,
-              title: aiAnalysis.title,
-              description: aiAnalysis.description,
-              characteristics: aiAnalysis.characteristics,
-              tips: aiAnalysis.tips
+              score: data.score,
+              compatibilityType: data.compatibilityType,
+              title: data.title,
+              description: data.description,
+              characteristics: data.characteristics,
+              tips: data.tips
             });
-          })
-          .catch(error => {
-            console.log("백그라운드 AI 분석 실패:", error);
-          });
+          } else {
+            // If both AI and basic data fail, create a generic response
+            compatibility = await storage.createMBTICompatibility({
+              type1,
+              type2,
+              score: 70,
+              compatibilityType: "특별한 관계",
+              title: `${type1}과 ${type2}의 궁합`,
+              description: "두 타입의 독특한 매력",
+              characteristics: "연애할 때 우리는 서로 다른 매력을 가진 두 사람으로서 특별한 관계를 만들어갑니다. 각자의 고유한 성격과 장점들이 만나 새로운 시너지를 창출하며, 서로에게서 배울 점이 많은 관계입니다. 때로는 차이로 인한 갈등이 있을 수 있지만, 이를 통해 서로를 더 깊이 이해하고 성장할 수 있는 기회를 얻게 됩니다.",
+              tips: "서로의 차이점을 존중하고 이해하려고 노력하세요. 각자의 고유한 장점과 특성을 인정하고, 때로는 서로의 관점에서 세상을 바라보려 노력해보세요. 소통을 통해 서로의 필요와 감정을 공유하고, 갈등이 생겼을 때는 인내심을 갖고 해결해나가세요. 서로의 성장을 지지하고 격려하며, 함께 만들어가는 관계의 소중함을 기억하세요."
+            });
+          }
+        }
       }
 
       res.json(compatibility);

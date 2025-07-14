@@ -309,6 +309,15 @@ export const mbtiCompatibilityData: Record<string, MBTICompatibilityData> = {
     tips: "서로의 다른 가치관과 생활 방식을 존중하고 이해하세요. ESTJ는 ISFP의 자유로운 표현과 감정을 억압하지 말고, ISFP는 ESTJ의 체계적 접근을 답답해하지 마세요. 계획과 즉흥성의 균형을 찾아 때로는 계획된 활동을, 때로는 자연스러운 흐름을 따라가보세요. 서로의 스트레스 신호를 파악하고 적절한 거리와 지지를 제공하세요. ISFP의 창의적 활동에 ESTJ가 관심을 보이고, ESTJ의 체계적 접근에 ISFP가 감사를 표현하면 관계가 더욱 돈독해집니다. 소통할 때는 비판보다는 격려와 이해를 우선하세요."
   },
 
+  "ESTJ+ISTP": {
+    score: 71,
+    compatibilityType: "실용적 파트너십",
+    title: "체계적 리더와 유연한 실행가",
+    description: "서로의 강점을 활용하는 효율적인 관계입니다!",
+    characteristics: "ESTJ의 체계적이고 목표 지향적인 리더십과 ISTP의 유연하고 실용적인 실행력이 만나 매우 효율적인 관계를 형성합니다. 둘 다 현실적이고 결과 중심적인 접근을 선호하며, 불필요한 감정적 드라마보다는 명확하고 직접적인 소통을 추구합니다. ESTJ는 ISTP에게 방향성과 구조를 제공하고, ISTP는 ESTJ의 계획을 실제로 실행하는 데 뛰어난 능력을 발휘합니다. 서로의 독립성을 존중하면서도 필요할 때는 신뢰할 수 있는 파트너가 되어줍니다.",
+    tips: "서로의 다른 일 처리 방식과 의사소통 스타일을 이해하고 존중하세요. ESTJ는 ISTP의 독립적 성향과 유연한 접근을 억압하지 말고, ISTP는 ESTJ의 체계적 계획의 필요성을 인정하세요. 목표 설정과 실행 과정에서 서로의 강점을 적극 활용하되, 과도한 통제나 압박은 피하세요. 실용적이고 구체적인 문제 해결에 집중하고, 감정적 갈등보다는 논리적 접근을 선호하세요. 서로의 전문성과 기술을 인정하고, 필요할 때는 충분한 자율성을 보장해주세요."
+  },
+
   // Pattern continues for all 256 combinations...
   // Each entry follows the same structure with unique content based on MBTI compatibility theory
 };

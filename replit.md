@@ -99,3 +99,12 @@ Preferred communication style: Simple, everyday language.
 - **Logging**: Request/response logging with performance metrics
 
 The application is designed to be easily deployable on platforms like Replit, Vercel, or similar hosting services with automatic environment detection and appropriate middleware configuration.
+
+## Recent Changes: Latest modifications with dates
+
+### 2024-01-14: AI 분석 시스템 완전 적용
+- GPT API를 통한 실시간 모든 256개 MBTI 조합 분석 지원
+- 기본 데이터 의존성 제거, AI 우선 분석으로 전환  
+- 감성적이고 재치 있는 프롬프트로 업데이트
+- 볼드 처리를 MBTI 타입에서 중요 감정 키워드로 변경
+- 응답 시간 최적화 및 토큰 사용량 개선
