@@ -1,0 +1,22 @@
+{
+  "title": "MBTI相性テスト",
+  "subtitle": "AIがリアルタイムで二人の恋愛相性を分析します。最新のMBTI理論に基づいたカスタマイズ分析と実用的な恋愛アドバイスを提供します。",
+  "selectType": "MBTIタイプを選択",
+  "analyzing": "AIが相性を分析中です！",
+  "characteristics": "恋愛での特徴",
+  "tips": "恋愛のコツ",
+  "compatibility": "特別な組み合わせ",
+  "share": "シェア",
+  "retry": "再試行",
+  "progress": "分析進行率",
+  "person1": "あなたのMBTI",
+  "person2": "相手のMBTI",
+  "person1Desc": "一人目の性格タイプを選択してください",
+  "person2Desc": "二人目の性格タイプを選択してください",
+  "selected": "選択されたタイプ",
+  "none": "なし",
+  "analyzeButton": "相性を分析する",
+  "backButton": "再選択",
+  "metaTitle": "MBTI相性テスト – 私たちって本当に相性いいの？[無料心理恋愛テスト]",
+  "metaDescription": "MBTIタイプで分かる恋愛相性テスト！感情豊かなタイプ別分析とコツまで、今すぐ無料で確認。"
+}

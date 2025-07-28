@@ -137,3 +137,13 @@ The application is designed to be easily deployable on platforms like Replit, Ve
 - robots.txt와 sitemap.xml을 서버 라우트로 우선 처리하도록 개선
 - 구글과 네이버 양쪽 검색엔진 인증 시스템 완성
 - 모든 SEO 파일들이 정적 파일과 서버 라우트 이중 지원으로 안정성 확보
+
+### 2025-01-28: 다국어 시스템 구조 개선 완료
+- 기존 인라인 translations 객체를 독립 JSON 파일로 분리
+- 11개 언어 지원: ko, en, ja, id(인도네시아어 신규 추가), zh, es, fr, de, it, pt, ru
+- `/public/` 폴더에 언어별 JSON 파일 구조로 관리 (ko.json, en.json 등)
+- 브라우저 언어 자동 감지 시스템 유지 (기본값: ko)
+- 비동기 번역 로딩 시스템으로 성능 최적화
+- 번역 캐시 시스템으로 중복 요청 방지
+- 메인 앱과 정적 페이지 하단 footer에 콘텐츠 탐색 링크 추가
+- 모든 copyright 연도를 2025년으로 업데이트

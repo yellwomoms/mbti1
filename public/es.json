@@ -1,0 +1,22 @@
+{
+  "title": "Test de Compatibilidad MBTI",
+  "subtitle": "La IA analiza en tiempo real la compatibilidad romántica entre dos personas. Obtén análisis personalizado y consejos prácticos de citas basados en la última teoría MBTI.",
+  "selectType": "Seleccionar Tipo MBTI",
+  "analyzing": "¡La IA está analizando la compatibilidad!",
+  "characteristics": "Características de la relación",
+  "tips": "Consejos de citas",
+  "compatibility": "Combinación especial",
+  "share": "Compartir",
+  "retry": "Reintentar",
+  "progress": "Progreso del análisis",
+  "person1": "Tu MBTI",
+  "person2": "MBTI de tu pareja",
+  "person1Desc": "Por favor selecciona el tipo de personalidad de la primera persona",
+  "person2Desc": "Por favor selecciona el tipo de personalidad de la segunda persona",
+  "selected": "Tipo seleccionado",
+  "none": "Ninguno",
+  "analyzeButton": "Analizar Compatibilidad",
+  "backButton": "Seleccionar de Nuevo",
+  "metaTitle": "Test de Compatibilidad MBTI – ¿Somos Realmente Compatibles? [Test Psicológico de Citas Gratis]",
+  "metaDescription": "¡Descubre tu compatibilidad romántica a través de los tipos de personalidad MBTI! Obtén análisis emocional y consejos prácticos gratis."
+}
