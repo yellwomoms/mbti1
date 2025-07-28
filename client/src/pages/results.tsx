@@ -401,7 +401,6 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               <a 
                 href="/blog/infp-love-style.html" 
-                target="_blank"
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
               >
                 <div className="text-2xl mb-2">💜</div>
@@ -411,7 +410,6 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               
               <a 
                 href="/blog/enfp-intj-match.html" 
-                target="_blank"
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
               >
                 <div className="text-2xl mb-2">🔥</div>
@@ -421,7 +419,6 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               
               <a 
                 href="/blog/mbti-breakup.html" 
-                target="_blank"
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
               >
                 <div className="text-2xl mb-2">💔</div>
@@ -431,7 +428,6 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               
               <a 
                 href="/blog/mbti-conflict-tips.html" 
-                target="_blank"
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
               >
                 <div className="text-2xl mb-2">🤝</div>
@@ -442,22 +438,22 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             
             {/* Footer Links */}
             <div className="flex flex-wrap justify-center gap-6 text-white/80 text-sm">
-              <a href="/about.html" target="_blank" className="hover:text-white transition-colors">
+              <a href="/about.html" className="hover:text-white transition-colors">
                 서비스 소개
               </a>
-              <a href="/contact.html" target="_blank" className="hover:text-white transition-colors">
+              <a href="/contact.html" className="hover:text-white transition-colors">
                 문의하기
               </a>
-              <a href="/privacy.html" target="_blank" className="hover:text-white transition-colors">
+              <a href="/privacy.html" className="hover:text-white transition-colors">
                 개인정보처리방침
               </a>
-              <a href="/terms.html" target="_blank" className="hover:text-white transition-colors">
+              <a href="/terms.html" className="hover:text-white transition-colors">
                 이용약관
               </a>
             </div>
             
             <div className="mt-6 text-white/60 text-xs">
-              © 2024 MBTI 궁합 테스트. All rights reserved.
+              © 2025 MBTI 궁합 테스트. All rights reserved.
             </div>
           </div>
         </div>
