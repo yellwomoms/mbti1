@@ -7,22 +7,112 @@
     <meta name="description" content="MBTI 궁합 테스트 사이트 소개. 과학적이고 신뢰할 수 있는 성격 유형 분석으로 연애 궁합을 알아보세요.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #6366f1; text-align: center; }
-        h2 { color: #4338ca; margin-top: 2rem; }
-        .intro { background: #f8fafc; padding: 20px; border-radius: 10px; margin: 20px 0; }
-        .feature { margin: 15px 0; padding: 15px; border-left: 4px solid #6366f1; }
-        footer { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; }
-        a { color: #6366f1; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        h1 { 
+            color: #6366f1; 
+            text-align: center; 
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        h2 { 
+            color: #4338ca; 
+            margin-top: 2rem; 
+            font-size: 1.8em;
+            border-bottom: 3px solid #e5e7eb; 
+            padding-bottom: 10px;
+        }
+        .intro { 
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%); 
+            padding: 30px; 
+            border-radius: 15px; 
+            margin: 30px 0; 
+            border-left: 5px solid #6366f1;
+            font-size: 1.1em;
+        }
+        .feature { 
+            margin: 20px 0; 
+            padding: 20px; 
+            border-left: 4px solid #6366f1; 
+            background: #f8fafc;
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+        .feature:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1);
+        }
+        .feature strong {
+            color: #4338ca;
+            font-size: 1.1em;
+        }
+        footer { 
+            text-align: center; 
+            margin-top: 3rem; 
+            padding-top: 2rem; 
+            border-top: 2px solid #e5e7eb; 
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        a { 
+            color: #6366f1; 
+            text-decoration: none; 
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        a:hover { 
+            color: #4338ca;
+            text-decoration: underline; 
+        }
+        ul {
+            padding-left: 25px;
+        }
+        li {
+            margin: 10px 0;
+            font-size: 1.05em;
+        }
+        .vision-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #f59e0b;
+        }
     </style>
 </head>
 <body>
-    <h1>MBTI 궁합 테스트 소개</h1>
-    
-    <div class="intro">
-        <p>안녕하세요! MBTI 궁합 테스트에 오신 것을 환영합니다. 저희는 과학적인 성격 유형 분석을 바탕으로 연애 궁합을 알아볼 수 있는 무료 서비스를 제공합니다.</p>
-    </div>
+    <div class="container">
+        <h1>🧠 MBTI 궁합 테스트 소개</h1>
+        
+        <div class="intro">
+            <p>안녕하세요! <strong>MBTI 궁합 테스트</strong>에 오신 것을 환영합니다. 저희는 과학적인 성격 유형 분석을 바탕으로 연애 궁합을 알아볼 수 있는 무료 서비스를 제공합니다.</p>
+            
+            <p>이 웹사이트는 MBTI 성격유형 기반 궁합 테스트를 제공하는 서비스입니다. 사용자가 자신의 성격 유형과 상대방의 성격 유형을 입력하면, 각 조합에 맞는 궁합 해설을 AI가 분석하고 제공합니다.</p>
+        </div>
+        
+        <div class="vision-box">
+            <p><strong>우리의 비전:</strong> 연인, 친구, 동료 등 다양한 관계 속에서 MBTI를 활용하여 더 나은 이해와 소통을 돕는 것이 이 서비스의 목적입니다. 단순한 테스트를 넘어, 관계의 깊이를 탐색하고 서로의 차이를 존중할 수 있는 콘텐츠를 제공하는 것이 우리의 목표입니다.</p>
+        </div>
     
     <h2>🧠 MBTI란 무엇인가요?</h2>
     <p>MBTI(Myers-Briggs Type Indicator)는 세계에서 가장 널리 사용되는 성격 유형 검사 중 하나입니다. 16가지 성격 유형으로 분류하여 개인의 성향과 특성을 이해할 수 있도록 도와줍니다.</p>
@@ -78,9 +168,10 @@
     
     <p>저희 서비스가 여러분의 사랑에 작은 도움이 되기를 바라며, 앞으로도 더 나은 서비스를 제공하기 위해 노력하겠습니다.</p>
     
-    <footer>
-        <p><a href="/">홈으로 돌아가기</a> | <a href="/contact.html">문의하기</a> | <a href="/privacy.html">개인정보처리방침</a></p>
-        <p>&copy; 2024 MBTI 궁합 테스트. All rights reserved.</p>
-    </footer>
+        <footer>
+            <p><a href="/">🏠 홈으로 돌아가기</a> | <a href="/contact.html">📧 문의하기</a> | <a href="/privacy.html">🔒 개인정보처리방침</a></p>
+            <p style="margin-top: 15px; color: #6b7280;">&copy; 2024 MBTI 궁합 테스트. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
