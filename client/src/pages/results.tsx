@@ -391,6 +391,76 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             AI가 실시간으로 생성한 <span className="font-semibold">맞춤형</span> MBTI 궁합 분석
           </p>
         </div>
+
+        {/* Footer Links */}
+        <div className="mt-16 pt-8 border-t border-white/20">
+          <div className="text-center">
+            <h3 className="text-white text-lg font-semibold mb-6">더 많은 콘텐츠 보기</h3>
+            
+            {/* Blog Links */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <a 
+                href="/blog/infp-love-style.html" 
+                target="_blank"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
+              >
+                <div className="text-2xl mb-2">💜</div>
+                <div className="font-medium">INFP 연애 스타일</div>
+                <div className="text-sm text-white/70">깊이 있는 사랑법</div>
+              </a>
+              
+              <a 
+                href="/blog/enfp-intj-match.html" 
+                target="_blank"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
+              >
+                <div className="text-2xl mb-2">🔥</div>
+                <div className="font-medium">ENFP-INTJ 궁합</div>
+                <div className="text-sm text-white/70">운명적 조합</div>
+              </a>
+              
+              <a 
+                href="/blog/mbti-breakup.html" 
+                target="_blank"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
+              >
+                <div className="text-2xl mb-2">💔</div>
+                <div className="font-medium">이별 극복법</div>
+                <div className="text-sm text-white/70">유형별 회복법</div>
+              </a>
+              
+              <a 
+                href="/blog/mbti-conflict-tips.html" 
+                target="_blank"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
+              >
+                <div className="text-2xl mb-2">🤝</div>
+                <div className="font-medium">갈등 해결법</div>
+                <div className="text-sm text-white/70">소통 전략</div>
+              </a>
+            </div>
+            
+            {/* Footer Links */}
+            <div className="flex flex-wrap justify-center gap-6 text-white/80 text-sm">
+              <a href="/about.html" target="_blank" className="hover:text-white transition-colors">
+                서비스 소개
+              </a>
+              <a href="/contact.html" target="_blank" className="hover:text-white transition-colors">
+                문의하기
+              </a>
+              <a href="/privacy.html" target="_blank" className="hover:text-white transition-colors">
+                개인정보처리방침
+              </a>
+              <a href="/terms.html" target="_blank" className="hover:text-white transition-colors">
+                이용약관
+              </a>
+            </div>
+            
+            <div className="mt-6 text-white/60 text-xs">
+              © 2024 MBTI 궁합 테스트. All rights reserved.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
