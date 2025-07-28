@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MBTI 궁합 테스트 - 당신과 상대방의 성격 궁합을 확인해보세요. 재미있고 정확한 성격 궁합 해설 제공.">
+  <meta name="keywords" content="MBTI, 궁합 테스트, 성격 유형, 연애 궁합, 성격 분석, MBTI 해설">
+  <meta name="author" content="MBTI Compatibility Team">
+  <title>MBTI 궁합 테스트</title>
+  <!-- Google Adsense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- 🔗 푸터 링크 -->
+<footer>
+  <div class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms of Service</a>
+  </div>
+</footer>
+
+<!-- 📰 추천 블로그 콘텐츠 섹션 -->
+<section class="recommended-content">
+  <h2>참고할 방향성 커피츠</h2>
+  <div class="blog-cards">
+    <div class="card">
+      <img src="/blog-assets/infp-love-style.jpg" alt="INFP 리어와 여름의 정령">
+      <a href="/blog/infp-love-style.html">
+        INFP 리어의 복잡한 가정적 여름 방식</a>
+    </div>
+    <div class="card">
+      <img src="/blog-assets/enfp-intj-match.jpg" alt="ENFP가 INTJ와 잘 맞는 이유">
+      <a href="/blog/enfp-intj-match.html">
+        ENFP가 INTJ와 잘 맞는 이유</a>
+    </div>
+    <div class="card">
+      <img src="/blog-assets/mbti-breakup.jpg" alt="MBTI 그녀가 이번에는 정말 이번지 않는 이유">
+      <a href="/blog/mbti-breakup.html">
+        MBTI가 복귀를 얻을 수 있는 것격로?</a>
+    </div>
+    <div class="card">
+      <img src="/blog-assets/mbti-conflict-tips.jpg" alt="MBTI 친구가 피가 발생했을 때">
+      <a href="/blog/mbti-conflict-tips.html">
+        MBTI 유형 가장 많이 마찬가르는 가정 주점</a>
+    </div>
+  </div>
+</section>
+
+<!-- Google Ad Placeholder Example -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center; margin: 2rem auto;"
+     data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- 나머지 콘텐츠들 그대로 아래 이어짐 -->
+<!-- 📄 블로그 콘텐츠 개별 HTML 예시 -->
+<!-- 📄 infp-love-style.html -->
+<article>
+  <h1>INFP 리어의 가정적 여름 방식</h1>
+  <p>INFP의 여름은 노란감과 자유를 얻고자 하는 것으로 시작됩니다. 환경을 중요시하며, 가장 자유로운 가정적 시간을 복잡한 방식으로 나타내는 성향이 강합니다.</p>
+  <p>MBTI와 같이 이야기를 조회하고, 다른 성격과의 가정적 행동을 비교하며 자세히 해석해 보세요.</p>
+</article>
+
+<!-- 📜 Legal Pages -->
+<!-- 📄 about.html -->
+<article>
+  <h1>About</h1>
+  <p>이 웹사이트는 MBTI 성격유형 기반 궁합 테스트를 제공하는 서비스입니다. 사용자가 자신의 성격 유형과 상대방의 성격 유형을 입력하면, 각 조합에 맞는 궁합 해설을 AI가 분석하고 제공합니다.</p>
+  <p>연인, 친구, 동료 등 다양한 관계 속에서 MBTI를 활용하여 더 나은 이해와 소통을 돕는 것이 이 서비스의 목적입니다. 단순한 테스트를 넘어, 관계의 깊이를 탐색하고 서로의 차이를 존중할 수 있는 콘텐츠를 제공하는 것이 우리의 비전입니다.</p>
+  <p>해당 서비스는 오로지 MBTI 궁합 테스트에 초점을 맞추고 있으며, 사용자의 데이터는 저장되지 않고 테스트 결과만 제공됩니다. 향후에는 더 다양한 유형 간 비교 분석, 연애 팁, 관계 유지 전략 등으로 확장할 예정입니다.</p>
+</article>
+
+<!-- 📄 contact.html -->
+<article>
+  <h1>Contact Us</h1>
+  <p>궁금한 점이나 문의사항은 아래 이메일로 연락 주세요.</p>
+  <p>📧 mbti@support.ai</p>
+</article>
+
+<!-- 📄 privacy.html -->
+<article>
+  <h1>Privacy Policy</h1>
+  <p>이 웹사이트는 이용자의 개인정보를 수집하거나 저장하지 않으며, 다음의 내용을 포함하여 사용자의 프라이버시를 존중합니다.</p>
+  <ul>
+    <li>입력된 MBTI 유형은 서버에 저장되지 않습니다.</li>
+    <li>쿠키는 서비스 개선 목적의 트래픽 분석(Google Analytics)에만 사용됩니다.</li>
+    <li>사용자의 동의 없이 제3자에게 어떠한 정보도 제공하지 않습니다.</li>
+  </ul>
+</article>
+
+<!-- 📄 terms.html -->
+<article>
+  <h1>Terms of Service</h1>
+  <p>본 서비스는 아래의 약관에 동의하는 경우에만 이용하실 수 있습니다.</p>
+  <ul>
+    <li>제공되는 테스트 결과는 오락 및 참고 목적이며, 의학적 또는 심리학적 조언으로 간주되지 않습니다.</li>
+    <li>서비스는 별도의 고지 없이 변경 또는 중단될 수 있습니다.</li>
+    <li>타인의 MBTI 유형을 허위로 입력하여 분석 결과를 악용하는 행위는 금지됩니다.</li>
+  </ul>
+</article>
+
+<style>
+.footer-links a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #888;
+}
+.recommended-content {
+  padding: 2rem;
+  background-color: #fdf9fc;
+}
+.blog-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.card {
+  width: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: scale(1.02);
+}
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+.card a {
+  display: block;
+  padding: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #333;
+}
+</style>
+
+</body>
+</html>

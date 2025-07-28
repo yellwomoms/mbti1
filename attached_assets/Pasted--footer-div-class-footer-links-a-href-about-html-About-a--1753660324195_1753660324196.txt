@@ -1,0 +1,123 @@
+<!-- 🔗 푸터 링크 -->
+<footer>
+  <div class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms of Service</a>
+  </div>
+</footer>
+
+<!-- 📰 추천 블로그 콘텐츠 섹션 -->
+<section class="recommended-content">
+  <h2>참고할 방향성 커피츠</h2>
+  <div class="blog-cards">
+    <div class="card">
+      <img src="/blog-assets/infp-love-style.jpg" alt="INFP 리어와 여름의 정령">
+      <a href="/blog/infp-love-style.html">
+        INFP 리어의 복잡한 가정적 여름 방식</a>
+    </div>
+    <div class="card">
+      <img src="/blog-assets/enfp-intj-match.jpg" alt="ENFP가 INTJ와 잘 맞는 이유">
+      <a href="/blog/enfp-intj-match.html">
+        ENFP가 INTJ와 잘 맞는 이유</a>
+    </div>
+    <div class="card">
+      <img src="/blog-assets/mbti-breakup.jpg" alt="MBTI 그녀가 이번에는 정말 이번지 않는 이유">
+      <a href="/blog/mbti-breakup.html">
+        MBTI가 복귀를 얻을 수 있는 것격로?</a>
+    </div>
+    <div class="card">
+      <img src="/blog-assets/mbti-conflict-tips.jpg" alt="MBTI 친구가 피가 발생했을 때">
+      <a href="/blog/mbti-conflict-tips.html">
+        MBTI 유형 가장 많이 마찬가르는 가정 주점</a>
+    </div>
+  </div>
+</section>
+
+<!-- 📄 블로그 콘텐츠 개별 HTML 예시 -->
+<!-- 📄 infp-love-style.html -->
+<article>
+  <h1>INFP 리어의 가정적 여름 방식</h1>
+  <p>INFP의 여름은 노란감과 자유를 얻고자 하는 것으로 시작됩니다. 환경을 중요시하며, 가장 자유로운 가정적 시간을 복잡한 방식으로 나타내는 성향이 강합니다.</p>
+  <p>MBTI와 같이 이야기를 조회하고, 다른 성격과의 가정적 행동을 비교하며 자세히 해석해 보세요.</p>
+</article>
+
+<!-- 📜 Legal Pages -->
+<!-- 📄 about.html -->
+<article>
+  <h1>About Sojil</h1>
+  <p>Sojil은 누구나 쉽게 콘텐츠를 생성하고 공유할 수 있도록 지원하는 AI 콘텐츠 플랫폼입니다. 저희는 최신 생성형 AI 기술을 활용해, 사용자들이 텍스트, 이미지, 마케팅 자료, 리뷰 콘텐츠 등을 자동으로 만들고 퍼블리싱할 수 있도록 돕습니다.</p>
+  <p>Sojil의 목표는 개인 창작자, 중소기업, 브랜드들이 기술 장벽 없이 온라인에서 자신의 가치를 널리 알릴 수 있도록 지원하는 것입니다. 콘텐츠의 품질, 시간 절약, 글로벌 접근성을 핵심 가치로 삼고 있으며, 전 세계 누구나 Sojil을 통해 수익을 창출할 수 있는 구조를 만들고자 합니다.</p>
+  <p>현재 Sojil은 블로그 콘텐츠 자동 생성, SNS 포맷 변환, 제휴 마케팅 연동 등 다양한 기능을 제공하며, 향후 Gumroad, Shopify, YouTube 등과의 수익화 파이프라인도 확대할 예정입니다.</p>
+  <p>우리 팀은 콘텐츠 전략가, 개발자, 디자이너로 구성되어 있으며, "누구나 콘텐츠로 수익을 창출할 수 있다"는 철학 아래 사용자 중심의 서비스를 계속 발전시키고 있습니다.</p>
+</article>
+
+<!-- 📄 contact.html -->
+<article>
+  <h1>Contact Us</h1>
+  <p>궁금한 점이나 협업 제안이 있으시다면 아래 이메일로 연락해주세요.</p>
+  <p>📧 contact@sojil.ai</p>
+</article>
+
+<!-- 📄 privacy.html -->
+<article>
+  <h1>Privacy Policy</h1>
+  <p>당사는 이용자의 개인정보 보호를 매우 중요시하며, 다음과 같은 방식으로 개인정보를 수집하고 사용합니다.</p>
+  <ul>
+    <li>쿠키와 로그 데이터는 서비스 개선에 사용됩니다.</li>
+    <li>개인정보는 제3자에게 절대 제공되지 않습니다.</li>
+    <li>Google Analytics 및 광고 플랫폼이 사용될 수 있습니다.</li>
+  </ul>
+</article>
+
+<!-- 📄 terms.html -->
+<article>
+  <h1>Terms of Service</h1>
+  <p>Sojil 서비스를 이용하시는 분은 아래의 조건에 동의하는 것으로 간주됩니다.</p>
+  <ul>
+    <li>서비스 내용은 사전 고지 없이 변경될 수 있습니다.</li>
+    <li>생성된 콘텐츠의 저작권은 사용자에게 있습니다.</li>
+    <li>불법적이거나 공격적인 콘텐츠는 금지됩니다.</li>
+  </ul>
+</article>
+
+<style>
+.footer-links a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #888;
+}
+.recommended-content {
+  padding: 2rem;
+  background-color: #fdf9fc;
+}
+.blog-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.card {
+  width: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: scale(1.02);
+}
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+.card a {
+  display: block;
+  padding: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #333;
+}
+</style>
